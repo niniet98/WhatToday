@@ -11,7 +11,7 @@ export default function Demo(props) {
 
 const styles = StyleSheet.create({
     demo: {
-        height: 230,
+        /* height: 230, */
         borderWidth: 1,
         borderColor: "#ddd",
         /* justifyContent: "center",
