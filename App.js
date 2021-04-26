@@ -4,6 +4,7 @@ import React from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import BottomBar from './components/BottomBar';
 import Profile from './components/Profile';
+import Prova from './components/Prova';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -24,6 +25,7 @@ export default function App() {
     <ScrollView style={styles.container}>
       <Profile />
       <BottomBar />
+      <Prova />
       <StatusBar style="auto" />
     </ScrollView>
   );
