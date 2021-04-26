@@ -1,13 +1,13 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import Demo from './Demo'
 
-export default function NavBar() {
+export default function BottomBar() {
     return (
         <Demo>
             <View style={styles.container}>
                 <View style={styles.column}>
-                    <Text>hey</Text>
+                    <Image />
                 </View>
                 <View style={styles.column}>
                     <Text>hey</Text>
