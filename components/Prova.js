@@ -6,8 +6,8 @@ export default function Prova() {
     return (
         <Demo>
             <View>
-                <Text>merda</Text>
-            </View>   
+                <Text>merdaaaaaaaaaaa</Text>
+            </View>
         </Demo>
     )
 }
