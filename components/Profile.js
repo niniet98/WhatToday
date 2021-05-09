@@ -2,9 +2,9 @@ import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import Demo from './Demo'
 
-export default function Profile() {
+export default function Profile({ blank, centered }) {
     return (
-        <Demo>
+        <Demo blank={blank} centered={centered}>
             <View style={{ margin: 20 }}>
                 <Text style={styles.fontText, { fontSize: 18 }}>ayelen_97</Text>
             </View>

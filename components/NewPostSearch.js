@@ -2,9 +2,9 @@ import React from 'react'
 import { View, Text, StyleSheet, TextInput } from 'react-native'
 import Demo from './Demo'
 
-export default function NewPostSearch() {
+export default function NewPostSearch({ blank, centered }) {
     return (
-        <Demo>
+        <Demo blank={blank} centered={centered}>
             <View style={styles.container}>
                 <View style={styles.icon} />
                 <TextInput
@@ -17,8 +17,6 @@ export default function NewPostSearch() {
         </Demo>
     )
 }
-
-
 
 const styles = StyleSheet.create({
     container: {

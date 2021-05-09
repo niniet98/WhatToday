@@ -18,11 +18,11 @@ export default function Checkbox({ children }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
+        /* padding: 20, */
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
-        backgroundColor: "#FC633A"
+        /* backgroundColor: "#FC633A" */
     },
     label: {
         marginLeft: 10,

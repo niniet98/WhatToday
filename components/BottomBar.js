@@ -6,9 +6,9 @@ import Chef from './icons/chef'
 import ProfileIcon from './icons/profile';
 import Settings from './icons/settings';
 
-export default function BottomBar() {
+export default function BottomBar({ blank }) {
     return (
-        <Demo>
+        <Demo blank={blank}>
             {/* BottomBar */}
             <View style={styles.container1}>
                 <View style={styles.column} onPres>
@@ -32,7 +32,7 @@ export default function BottomBar() {
                     </Pressable>
                 </View>
             </View>
-            {/* Variant, provisionalment el fons es gris, sino no es veuen els svg */}
+            {/* Variant, provisionalment el fons es gris, sino no es veuen els svg (en la variant són blancs) */}
             <View style={styles.container2}>
                 <View style={styles.column} onPres>
                     <Pressable onPress={null}>

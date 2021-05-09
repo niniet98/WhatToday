@@ -21,13 +21,13 @@ const textsGenerator = (iter, element) => {
 
 //---------------------------------//
 
-export default function Title({ children }) {
+export default function Title({ children, blank, centered }) {
 
     const shadowText = <Text style={[styles.text, styles.absolutPosition]}>{children}</Text>;
     const shadowContent = textsGenerator(iterations, shadowText);
 
     return (
-        <Demo>
+        <Demo blank={blank} centered={centered}>
             <View style={styles.container}>
                 <Text style={styles.text}>
                     {children}

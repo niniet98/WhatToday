@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         padding: 20,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#FC633A"
+        /* backgroundColor: "#FC633A" */
     },
     rectangle: {
         flexDirection: "row",
