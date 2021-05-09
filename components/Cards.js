@@ -28,14 +28,14 @@ export default function CardCreation() {
 const styles = StyleSheet.create({
     text: {
         fontFamily: 'Poppins-Bold',
-        fontWeight: 'bold',
         textTransform: 'uppercase',
         textAlign: 'center',
         color: "white",
         fontSize: 20,
         position: 'absolute',
-        marginTop: 450, 
-        marginLeft: 30,
+        marginTop: 465, 
+        marginLeft: 45,
+        shadowColor: 10,
     },
 
     picture: {
