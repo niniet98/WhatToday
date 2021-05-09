@@ -5,6 +5,10 @@ import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-nat
 import BottomBar from './components/BottomBar';
 import Profile from './components/Profile';
 import Prova from './components/Prova';
+import FilterButton from './components/FilterButton';
+import TextBox from './components/TextField';
+import BottomSubmit from './components/ButtonSubmit';
+import CardCreation from './components/Cards';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -23,10 +27,10 @@ export default function App() {
 
   return (
     <ScrollView style={styles.container}>
-      <Profile />
-      <BottomBar />
-      <Prova />
-      <StatusBar style="auto" />
+      <FilterButton />
+      <TextBox />
+      <BottomSubmit />
+     <CardCreation />
     </ScrollView>
   );
 }
