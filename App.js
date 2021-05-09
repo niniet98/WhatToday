@@ -9,6 +9,12 @@ import FilterButton from './components/FilterButton';
 import TextBox from './components/TextField';
 import BottomSubmit from './components/ButtonSubmit';
 import CardCreation from './components/Cards';
+import Title from './components/Title';
+import Category from './components/Category';
+import Slider from './components/Slider';
+import NewPostSearch from './components/NewPostSearch';
+import Post from './components/Post';
+import Checkbox from './components/Checkbox';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -30,7 +36,14 @@ export default function App() {
       <FilterButton />
       <TextBox />
       <BottomSubmit />
-     <CardCreation />
+      <CardCreation />
+      <Title>What{"\n"}Today</Title>
+      <Title>Sign Up</Title>
+      <Category>PIZZAS</Category>
+      <Slider />
+      <NewPostSearch />
+      <Post />
+      <Checkbox>Keep logged in</Checkbox>
     </ScrollView>
   );
 }
