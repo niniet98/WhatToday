@@ -4,15 +4,14 @@ import Demo from './Demo';
 import IconButton from './IconButton';
 
 
-export default function IconSubMenu({ blank, centered }) {
+export default function IconSubMenu() {
     /*iconName --> chef - grid - info - tags - ingredients - directions*/
     return (
-        <Demo blank={blank} centered={centered}>
-            <View style={styles.buttons}>
-                <IconButton selected={true} iconName={'grid'} />
-                <IconButton selected={false} iconName={'chef'} />
-            </View>
-        </Demo>
+
+        <View style={styles.buttons}>
+            <IconButton selected={true} iconName={'grid'} />
+            <IconButton selected={false} iconName={'chef'} />
+        </View>
     )
 }
 

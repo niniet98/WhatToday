@@ -4,10 +4,8 @@ import { useFonts } from "expo-font";
 import React from 'react';
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import MainBottomTabNav from "./components/MainBottomTabNav";
-import HomeScreen from './screens/HomeScreen';
 
 const Stack = createStackNavigator();
-
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -26,7 +24,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TabNav" screenOptions={{headerShown: false}}>
+      <Stack.Navigator initialRouteName="TabNav" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="TabNav" component={MainBottomTabNav} />
         {/* <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }} /> */}
         {/* <Stack.Screen name="screentwo" component={ScreenTwo} /> */}

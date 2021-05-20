@@ -2,22 +2,20 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import Demo from './Demo'
 
-export default function FilterButton({ children, blank }) {
+export default function FilterButton({ children }) {
 
     const [pressed, setPressed] = useState(false);
 
     const extraStyle = pressed ? styles.buttonPressed : styles.buttonNotPressed;
 
     return (
-        <Demo blank={blank}>
-            <TouchableWithoutFeedback onPress={() => setPressed((prevPressed) => !prevPressed)}>
-                <View style={styles.container}>
-                    <View style={[styles.button, extraStyle]}>
-                        <Text style={styles.buttonText}>{children}</Text>
-                    </View>
+        <TouchableWithoutFeedback onPress={() => setPressed((prevPressed) => !prevPressed)}>
+            <View style={styles.container}>
+                <View style={[styles.button, extraStyle]}>
+                    <Text style={styles.buttonText}>Vegan</Text>
                 </View>
-            </TouchableWithoutFeedback>
-        </Demo>
+            </View>
+        </TouchableWithoutFeedback>
     )
 }
 

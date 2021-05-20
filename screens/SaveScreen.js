@@ -4,7 +4,7 @@ import { View, Text, Button, StyleSheet } from 'react-native'
 export default function SaveScreen({ navigation }) {
     return (
         <View style={styles.screen}>
-            <Text>Això són els ajustos, per sortir de la sessió.</Text>
+            <Text>Això són les receptes guardades.</Text>
             <View style={{ height: 50 }}></View>
             <Button
                 title="Screen 2"

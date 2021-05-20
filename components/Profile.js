@@ -2,10 +2,10 @@ import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import Demo from './Demo'
 
-export default function Profile({ blank, centered }) {
+export default function Profile() {
     return (
-        <Demo blank={blank} centered={centered}>
-            <View style={{ margin: 20 }}>
+        <View>
+            <View style={{ margin: 25, marginBottom: 60 }}>
                 <Text style={styles.fontText, { fontSize: 18 }}>ayelen_97</Text>
             </View>
             <View style={styles.container}>
@@ -21,10 +21,10 @@ export default function Profile({ blank, centered }) {
                     <Text style={styles.text, styles.fontText}>Saved</Text>
                 </View>
             </View>
-            <View style={styles.fontText, { margin: 20, alignItems: 'center', fontSize: 12 }}>
+            <View style={styles.fontText, { margin: 25, alignItems: 'center', fontSize: 12, marginTop: 70 }}>
                 <Text>Ayelen</Text>
             </View>
-        </Demo>
+        </View>
     )
 }
 
