@@ -1,20 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React from 'react';
-import SettingsScreen from './screens/SettingsScreen';
-import HomeScreen from './screens/HomeScreen';
-import Settings from "./components/icons/settings";
-import Chef from "./components/icons/chef";
-import Add from "./components/icons/add";
-import ProfileIcon from "./components/icons/profile";
-import AddScreen from "./screens/AddScreen";
-import ProfileScreen from "./screens/ProfileScreen";
 import { useFonts } from "expo-font";
+import React from 'react';
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+import MainBottomTabNav from "./components/MainBottomTabNav";
+import HomeScreen from './screens/HomeScreen';
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -33,24 +26,11 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator initialRouteName="home">
-        <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="screentwo" component={ScreenTwo} />
-      </Stack.Navigator> */}
-      <Tab.Navigator initialRouteName="chef" tabBarOptions={{ showLabel: false }}>
-        <Tab.Screen name="settings" component={SettingsScreen} options={{
-          tabBarIcon: () => <Settings />
-        }} />
-        <Tab.Screen name="chef" component={HomeScreen} options={{
-          tabBarIcon: () => <Chef />
-        }} />
-        <Tab.Screen name="add" component={AddScreen} options={{
-          tabBarIcon: () => <Add />
-        }} />
-        <Tab.Screen name="profile" component={ProfileScreen} options={{
-          tabBarIcon: () => <ProfileIcon />
-        }} />
-      </Tab.Navigator>
+      <Stack.Navigator initialRouteName="TabNav" screenOptions={{headerShown: false}}>
+        <Stack.Screen name="TabNav" component={MainBottomTabNav} />
+        {/* <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }} /> */}
+        {/* <Stack.Screen name="screentwo" component={ScreenTwo} /> */}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

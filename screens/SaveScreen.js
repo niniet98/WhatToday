@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Button, StyleSheet } from 'react-native'
 
-export default function SettingsScreen({ navigation }) {
+export default function SaveScreen({ navigation }) {
     return (
         <View style={styles.screen}>
             <Text>Això són els ajustos, per sortir de la sessió.</Text>
