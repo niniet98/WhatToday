@@ -1,17 +1,23 @@
-import { useFonts } from 'expo-font';
-import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native'
-
 import { NavigationContainer } from "@react-navigation/native";
-/* import { createStackNavigator } from "@react-navigation/stack"; */
-
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from 'react';
+import SettingsScreen from './screens/SettingsScreen';
 import HomeScreen from './screens/HomeScreen';
-import ScreenTwo from './screens/ScreenTwo';
+import Settings from "./components/icons/settings";
+import Chef from "./components/icons/chef";
+import Add from "./components/icons/add";
+import ProfileIcon from "./components/icons/profile";
+import AddScreen from "./screens/AddScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import { useFonts } from "expo-font";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 
-/* const Stack = createStackNavigator(); */
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-  /* const [fontsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     "Poppins-Bold": require("./assets/fonts/Poppins-Bold.ttf"),
     "Poppins-Medium": require("./assets/fonts/Poppins-Medium.ttf"),
     "Poppins-Regular": require("./assets/fonts/Poppins-Regular.ttf")
@@ -23,27 +29,38 @@ export default function App() {
         <ActivityIndicator />
       </View>
     );
-  } */
+  }
 
   return (
     <NavigationContainer>
-      <View style={styles.conatiner}>
-        <Text>asdfghjkl</Text>
-      </View>
-      {/* <Stack.Navigatior>
-        <Stack.Screen name="home" component={HomeScreen} />
+      {/* <Stack.Navigator initialRouteName="home">
+        <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="screentwo" component={ScreenTwo} />
-      </Stack.Navigatior> */}
+      </Stack.Navigator> */}
+      <Tab.Navigator initialRouteName="chef" tabBarOptions={{ showLabel: false }}>
+        <Tab.Screen name="settings" component={SettingsScreen} options={{
+          tabBarIcon: () => <Settings />
+        }} />
+        <Tab.Screen name="chef" component={HomeScreen} options={{
+          tabBarIcon: () => <Chef />
+        }} />
+        <Tab.Screen name="add" component={AddScreen} options={{
+          tabBarIcon: () => <Add />
+        }} />
+        <Tab.Screen name="profile" component={ProfileScreen} options={{
+          tabBarIcon: () => <ProfileIcon />
+        }} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
 
-
 const styles = StyleSheet.create({
-  conatiner: {
+  container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center'
   }
 })
+
+

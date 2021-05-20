@@ -1,14 +1,25 @@
 import React from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, Text, StyleSheet, Button } from 'react-native'
+import CardCreation from '../components/Cards';
 
 export default function HomeScreen({ navigation }) {
     return (
-        <View>
-            <Text>Hola pepsicola!</Text>
-            <Button
-                title="Screen 2"
-                onPress={() => { navigation.navigate("screentwo") }}
-            ></Button>
+        <View /* style={styles.screen} */>
+            <CardCreation />
+            {/* <Text>Aquí es on podràn guardar i descartar receptes.</Text>
+            <View style={{ height: 10 }}></View>
+            <Button title="Back Please!" onPress={() => {
+                navigation.goBack();
+            }}
+            /> */}
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+})

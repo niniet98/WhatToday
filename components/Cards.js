@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
-import Demo from './Demo'
 
 
 
@@ -11,12 +10,12 @@ export default function CardCreation() {
     //const extraStyle = pressed ? styles.buttonPressed : styles.buttonNotPressed;
 
     return (
-        <Demo>
-            <View style={styles.container}>
-                <Image style={styles.picture} source={require('../assets/burguer.jpg')} />
-                <Text style={styles.text}>Hamburguesa, 326Kcal</Text>
-            </View>
-        </Demo>
+
+        <View style={styles.container}>
+            <Image style={styles.picture} source={require('../assets/burguer.jpg')} />
+            <Text style={styles.text}>Hamburguesa, 326Kcal</Text>
+        </View>
+
     )
 }
 
@@ -24,7 +23,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
-        alignItems: 'center',
+        /* alignItems: 'center', */
+        marginTop: 90,
         margin: 30,
     },
     picture: {
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         color: "white",
         fontSize: 20,
         position: 'absolute',
-        bottom: 10,
+        bottom: -490,
         left: 15,
         shadowColor: 10,
     },
