@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
-import Demo from './Demo'
+import Demo from '../Demo'
 
 export default function Profile() {
     return (
         <View>
-            <View style={{ margin: 25, marginBottom: 60 }}>
-                <Text style={styles.fontText, { fontSize: 18 }}>ayelen_97</Text>
+            <View style={{ marginHorizontal: 20, marginBottom: 60 }}>
+                <Text style={[styles.fontText, { fontSize: 18 }]}>ayelen_97</Text>
             </View>
             <View style={styles.container}>
                 <View style={styles.column}>
@@ -14,15 +14,15 @@ export default function Profile() {
                     <Text style={styles.text, styles.fontText}>Posts</Text>
                 </View>
                 <View style={styles.column}>
-                    <Image style={styles.avatar} source={require('../assets/ayelen.jpg')} />
+                    <Image style={styles.avatar} source={require('../../assets/ayelen.jpg')} />
                 </View>
                 <View style={styles.column}>
                     <Text style={styles.text, styles.fontText}>33</Text>
                     <Text style={styles.text, styles.fontText}>Saved</Text>
                 </View>
             </View>
-            <View style={styles.fontText, { margin: 25, alignItems: 'center', fontSize: 12, marginTop: 70 }}>
-                <Text>Ayelen</Text>
+            <View style={{ margin: 25, alignItems: 'center', marginTop: 70 }}>
+                <Text style={[styles.fontText, { fontSize: 12 }]}>Ayelen</Text>
             </View>
         </View>
     )
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     },
     fontText: {
         fontFamily: 'Poppins-Bold',
+        color: '#F23838'
     },
     text: {
         fontSize: 10,

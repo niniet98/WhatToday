@@ -1,14 +1,12 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
-import Demo from './Demo'
+import Demo from '../Demo'
 
 export default function Post() {
     return (
-        <Demo>
-            <View style={{ alignItems: "center", padding: 20 }}>
-                <Image style={styles.imagePost} source={require("../assets/recipe.jpg")} />
-            </View>
-        </Demo>
+
+        <Image style={styles.imagePost} source={require("../assets/recipe.jpg")} />
+
     )
 }
 

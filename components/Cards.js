@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         /* alignItems: 'center', */
-        /* marginTop: 100, */
+        marginTop: -460,
         /* marginVertical: 50, */
         margin: 20,
     },
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
         color: "white",
         fontSize: 20,
         position: 'absolute',
-        bottom: -490,
-        left: 15,
+        bottom: 20,
+        left: 20,
         shadowColor: 10,
     },
 

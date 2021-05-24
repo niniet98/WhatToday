@@ -1,25 +1,31 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import Profile from '../components/Profile'
-import IconSubMenu from '../components/ProfileMenu'
+import { View, Text, StyleSheet, FlatList } from 'react-native'
+import GetRandom from '../components/api/GetRandom'
+import IconButton from '../components/IconButton'
+import Profile from '../components/profile/Profile'
 
 export default function ProfileScreen() {
     return (
         <View style={styles.container}>
             <View style={{ height: 10 }}></View>
             <Profile />
-            <IconSubMenu />
-            <Text>Aquest serà el perfil.</Text>
+            <View style={styles.menu}>
+                <IconButton pressed={false} iconName={'grid'} />
+                <IconButton pressed={true} iconName={'chef'} />
+            </View>
+            <GetRandom />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
         flex: 1,
-        /* alignItems: 'center', */
-        /* justifyContent: 'center', */
+        flexDirection: 'column',
+        backgroundColor: 'white',
+    },
+    menu: {
+        flexDirection: 'row',
     },
 })
 

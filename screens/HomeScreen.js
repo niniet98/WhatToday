@@ -6,14 +6,14 @@ import FilterButton from '../components/FilterButton';
 export default function HomeScreen({ navigation }) {
     return (
         <View style={styles.screen}>
-            <FilterButton />
+            <View style={styles.filtersContainer}>
+                <FilterButton />
+                <FilterButton />
+                <FilterButton />
+                <FilterButton />
+            </View>
             <CardCreation />
-            {/* <Text>Aquí es on podràn guardar i descartar receptes.</Text>
-            <View style={{ height: 10 }}></View>
-            <Button title="Back Please!" onPress={() => {
-                navigation.goBack();
-            }}
-            /> */}
+
         </View>
     )
 }
@@ -21,7 +21,13 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        /* justifyContent: 'center', */
-        alignItems: 'center'
+        flexDirection: 'column',
+    },
+    filtersContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignContent: 'space-around',
+        marginHorizontal: 12,
+        marginVertical: 15,
     }
 })

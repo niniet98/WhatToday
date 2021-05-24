@@ -1,22 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Chef from './icons/chef';
+import MediumChef from './icons/mediumChef';
 import Grid from './icons/grid';
 import InfoIcon from './icons/infoIcon';
 import TagsIcon from './icons/tagsIcon';
 import IngredientsIcon from './icons/ingredientsIcon';
 import DirectionsIcon from './icons/directionsIcon';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 
-export default function IconButton({ selected, iconName }) {
-    const selectedStyle = selected ? styles.isSelected : styles.isNotSelected;
+export default function IconButton({ pressed, iconName }) {
+
+    /* const [pressed, setPressed] = useState(false); */
+
+    const selectedStyle = pressed ? styles.isSelected : styles.isNotSelected;
     /* const widthStyle = large ? styles.isLarge : styles.isShort; */
 
     switch (iconName) {
         case 'chef':
             return (
+
                 <View style={[styles.button, selectedStyle]}>
-                    <Chef width={25} height={25} />
+                    <MediumChef />
                 </View>
             )
             break;
@@ -76,10 +81,10 @@ const styles = StyleSheet.create({
     },
     button: {
         flex: 1,
-        flexDirection: 'row',
-        height: buttonHeight,
         justifyContent: "center",
         alignItems: "center",
+        /* height: buttonHeight, */
+        paddingVertical: 3,
     },
 
 

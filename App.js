@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useFonts } from "expo-font";
 import React from 'react';
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator, StatusBar, StyleSheet, View } from "react-native";
 import MainBottomTabNav from "./components/MainBottomTabNav";
 
 const Stack = createStackNavigator();
@@ -24,6 +24,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
+      <StatusBar></StatusBar>
       <Stack.Navigator initialRouteName="TabNav" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="TabNav" component={MainBottomTabNav} />
         {/* <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }} /> */}
