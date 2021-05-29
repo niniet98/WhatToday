@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, Image, StyleSheet, Dimensions, ActivityIndicator } from 'react-native'
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 
+const URL_BASE = 'https://api.spoonacular.com';
+
 const width = Dimensions.get('window').width;
 
 export default function GetRecipe({ item }) {
