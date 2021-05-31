@@ -8,10 +8,15 @@ import IngredientsIcon from './icons/ingredientsIcon';
 import DirectionsIcon from './icons/directionsIcon';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
+const MediumChefButton = (props) => (
+    <View style={[styles.button, /* selectedStyle */]} {...props}>
+        <MediumChef />
+    </View>
+)
 
-export default function IconButton({ pressed, iconName }) {
+export default function IconButton({ iconName }) {
 
-    /* const [pressed, setPressed] = useState(false); */
+    const [pressed, setPressed] = useState(false);
 
     const selectedStyle = pressed ? styles.isSelected : styles.isNotSelected;
     /* const widthStyle = large ? styles.isLarge : styles.isShort; */
@@ -19,17 +24,18 @@ export default function IconButton({ pressed, iconName }) {
     switch (iconName) {
         case 'chef':
             return (
-
-                <View style={[styles.button, selectedStyle]}>
-                    <MediumChef />
-                </View>
+                <TouchableWithoutFeedback onPress={() => setPressed((prevPressed) => !prevPressed)}>
+                    <MediumChefButton />
+                </TouchableWithoutFeedback>
             )
             break;
         case 'grid':
             return (
-                <View style={[styles.button, selectedStyle]}>
-                    <Grid />
-                </View>
+                <TouchableWithoutFeedback onPress={() => setPressed((prevPressed) => !prevPressed)}>
+                    <View style={[styles.button, selectedStyle]} >
+                        <Grid />
+                    </View>
+                </TouchableWithoutFeedback>
             )
             break;
         case 'info':
