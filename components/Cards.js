@@ -1,7 +1,9 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { Animated, PanResponder, StyleSheet, View, Image, Button, Alert, Text, IconButton } from "react-native";
+import { ModelContext } from "../model/WhatTodayModel";
 
 const DraggableView = () => {
+    const model = useContext(ModelContext);
     const pan = useRef(new Animated.ValueXY()).current;
 
     const panResponder = PanResponder.create({
@@ -38,7 +40,7 @@ const DraggableView = () => {
                     />
                     <Button
                         title="LIKE"
-                        onPress={() => Alert.alert('Right button pressed')}
+                        onPress={() => model.addFavRecipe(2)}
                     />
                 </View>
             </View>

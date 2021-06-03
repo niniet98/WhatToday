@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import React from 'react';
 import { ActivityIndicator, StatusBar, StyleSheet, View } from "react-native";
 import MainBottomTabNav from "./components/MainBottomTabNav";
+import { ModelProvider } from "./model/WhatTodayModel";
 
 const Stack = createStackNavigator();
 
@@ -23,14 +24,16 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <StatusBar></StatusBar>
-      <Stack.Navigator initialRouteName="TabNav" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="TabNav" component={MainBottomTabNav} />
-        {/* <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }} /> */}
-        {/* <Stack.Screen name="screentwo" component={ScreenTwo} /> */}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ModelProvider>
+      <NavigationContainer>
+        <StatusBar></StatusBar>
+        <Stack.Navigator initialRouteName="TabNav" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="TabNav" component={MainBottomTabNav} />
+          {/* <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }} /> */}
+          {/* <Stack.Screen name="screentwo" component={ScreenTwo} /> */}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ModelProvider>
   );
 }
 

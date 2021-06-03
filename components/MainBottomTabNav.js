@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator();
 
 export default function MainBottomTabNav() {
   return (
-    <Tab.Navigator initialRouteName="chef" tabBarOptions={{ showLabel: false }}>
+    <Tab.Navigator initialRouteName="home" tabBarOptions={{ showLabel: false }}>
       <Tab.Screen name="home" component={HomeScreen} options={{
         tabBarIcon: () => <HomeIcon />
       }} />

@@ -1,7 +1,10 @@
-import React from 'react'
+import { observer } from 'mobx-react';
+import React, { useContext } from 'react'
 import { View, Text, Button, StyleSheet } from 'react-native'
+import { ModelContext } from '../model/WhatTodayModel'
 
-export default function SaveScreen({ navigation }) {
+const SaveScreen = observer(({ navigation }) => {
+    const model = useContext(ModelContext);
     return (
         <View style={styles.screen}>
             <Text>Això són les receptes guardades.</Text>
@@ -10,9 +13,13 @@ export default function SaveScreen({ navigation }) {
                 title="Screen 2"
                 onPress={() => { navigation.navigate("screentwo") }}
             ></Button>
+            <Text>{model.favRecipes}</Text>
+            <Text>{model.totalRecipes}</Text>
         </View>
     )
-}
+});
+
+export default SaveScreen;
 
 const styles = StyleSheet.create({
     screen: {
