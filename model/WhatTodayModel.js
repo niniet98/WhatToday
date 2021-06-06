@@ -1,7 +1,11 @@
-import { action, computed, makeObservable, observable } from "mobx";
+import { action, computed, makeObservable, observable, observe } from "mobx";
 import React, { createContext } from "react";
 
+
 const URL_BASE = 'https://api.spoonacular.com/';
+const apiKey = "6b7427f391974de5921bcd793e67086e";
+const numberOfRecipes = 1;
+
 
 class WhatTodayModel {
     constructor() {
@@ -9,28 +13,24 @@ class WhatTodayModel {
         this.favRecipes = [];
 
         makeObservable(this, {
+            randomList: observable,
             favRecipes: observable,
             addFavRecipe: action,
-            totalRecipes: computed
+            loadRandomList: action
         })
     }
 
-    addFavRecipe(id) {
-        this.favRecipes.push(id);
-    }
-
-    get totalRecipes() {
-        let s = 0;
-        for (let i = 0; i < this.favRecipes.length; i++) {
-            s += this.favRecipes[i];
-        }
-        return s;
+    addFavRecipe(idParam, titleParam) {
+        this.favRecipes.push({
+            id: idParam,
+            title: titleParam
+        });
     }
 
     async loadRandomList() {
-        const response = await fetch(`${URL_BASE}/recipes/random/?apiKey=6b7427f391974de5921bcd793e67086e&number=5`);
+        const response = await fetch(`${URL_BASE}/recipes/random/?apiKey=${apiKey}&number=${numberOfRecipes}`);
         const json = await response.json();
-        this.randomList(json.recipes);
+        this.randomList = json.recipes;
     }
 
 }
@@ -44,6 +44,4 @@ export const ModelProvider = ({ children }) => (
         {children}
     </ModelContext.Provider>
 );
-
-//xddddd
 

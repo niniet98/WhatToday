@@ -13,8 +13,7 @@ const SaveScreen = observer(({ navigation }) => {
                 title="Screen 2"
                 onPress={() => { navigation.navigate("screentwo") }}
             ></Button>
-            <Text>{model.favRecipes}</Text>
-            <Text>{model.totalRecipes}</Text>
+            <Text>{model.favRecipes[0].id} - {model.favRecipes[0].title}</Text>
         </View>
     )
 });

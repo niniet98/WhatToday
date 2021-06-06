@@ -1,9 +1,11 @@
+import { observer } from "mobx-react";
 import React, { useContext, useRef } from "react";
 import { Animated, PanResponder, StyleSheet, View, Image, Button, Alert, Text, IconButton } from "react-native";
 import { ModelContext } from "../model/WhatTodayModel";
 
-const DraggableView = () => {
+const DraggableView = observer(() => {
     const model = useContext(ModelContext);
+    //-------------------//
     const pan = useRef(new Animated.ValueXY()).current;
 
     const panResponder = PanResponder.create({
@@ -29,8 +31,8 @@ const DraggableView = () => {
             <Animated.View
                 {...panResponder.panHandlers}
                 style={[pan.getLayout(), styles.box]}>
-                <Image style={styles.picture} source={require('../assets/burguer.jpg')} />
-                <Text style={styles.text}>Ola que ase, 580kcal</Text>
+                <Image style={styles.picture} source={{ uri: model.randomList[0].image }} />
+                <Text style={styles.text}>{model.randomList[0].title}</Text>
             </Animated.View>
             <View style={styles.butcontainer}>
                 <View style={styles.button}>
@@ -40,13 +42,13 @@ const DraggableView = () => {
                     />
                     <Button
                         title="LIKE"
-                        onPress={() => model.addFavRecipe(2)}
+                        onPress={() => model.addFavRecipe(model.randomList[0].id, model.randomList[0].title)}
                     />
                 </View>
             </View>
         </View>
     );
-};
+});
 
 const styles = StyleSheet.create({
     container: {
