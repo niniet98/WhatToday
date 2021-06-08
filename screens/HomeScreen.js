@@ -11,13 +11,13 @@ const HomeScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
 
     useEffect(() => {
-        model.loadRandomList();
+        model.loadRandomRecipe();
     }, []);
 
-    if (model.randomList == null) {
+    if (model.randomRecipe === null) {
         return (
-            <View style={styles.screen}>
-                <ActivityIndicator size="large" color="red" />
+            <View style={[styles.screen, styles.emptyScreen]}>
+                <ActivityIndicator size="large" color="#FC633A" />
             </View>
         )
     }
@@ -25,10 +25,10 @@ const HomeScreen = observer(({ navigation }) => {
     return (
         <View style={styles.screen}>
             <View style={styles.filtersContainer}>
-                <FilterButton />
-                <FilterButton />
-                <FilterButton />
-                <FilterButton />
+                <FilterButton filter="Mexican" />
+                <FilterButton filter="Irish" />
+                <FilterButton filter="Spanish" />
+                <FilterButton filter="African" />
             </View>
             <CardCreation />
         </View>
@@ -41,6 +41,10 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         flexDirection: 'column',
+    },
+    emptyScreen: {
+        justifyContent: "center",
+        alignItems: "center"
     },
     filtersContainer: {
         flex: 1,

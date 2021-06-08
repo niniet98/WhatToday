@@ -5,15 +5,22 @@ import { ModelContext } from '../model/WhatTodayModel'
 
 const SaveScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
+
+
+    let favRecipesContent = model.favRecipes.length === 0 ?
+        <Text>No hi ha receptes guardades</Text>
+        :
+        model.favRecipes.map((recipe, index) => <View style={styles.recipe}><Text style={styles.recipeText}>{recipe.title}</Text></View>);
+
+
     return (
         <View style={styles.screen}>
-            <Text>Això són les receptes guardades.</Text>
             <View style={{ height: 50 }}></View>
             <Button
                 title="Screen 2"
                 onPress={() => { navigation.navigate("screentwo") }}
-            ></Button>
-            <Text>{model.favRecipes[0].id} - {model.favRecipes[0].title}</Text>
+            />
+            {favRecipesContent}
         </View>
     )
 });
@@ -25,5 +32,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    recipe: {
+        justifyContent: "center",
+        alignItems: "center",
+        margin: 10,
+    },
+    recipeText: {
+        fontSize: 16,
+        fontWeight: "bold"
     }
 })

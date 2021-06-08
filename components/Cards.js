@@ -31,18 +31,21 @@ const DraggableView = observer(() => {
             <Animated.View
                 {...panResponder.panHandlers}
                 style={[pan.getLayout(), styles.box]}>
-                <Image style={styles.picture} source={{ uri: model.randomList[0].image }} />
-                <Text style={styles.text}>{model.randomList[0].title}</Text>
+                <Image style={styles.picture} source={{ uri: model.randomRecipe[0].image }} />
+                <Text style={styles.text}>{model.randomRecipe[0].title}, {model.randomRecipe[0].nutrition.nutrients[0].amount} Kcal</Text>
             </Animated.View>
             <View style={styles.butcontainer}>
                 <View style={styles.button}>
                     <Button
-                        title="KK"
-                        onPress={() => Alert.alert('Left button pressed')}
+                        title="Dislike"
+                        onPress={() => model.loadRandomRecipe()}
                     />
                     <Button
-                        title="LIKE"
-                        onPress={() => model.addFavRecipe(model.randomList[0].id, model.randomList[0].title)}
+                        title="Like"
+                        onPress={() => {
+                            model.addFavRecipe(model.randomRecipe[0].id, model.randomRecipe[0].title);
+                            model.loadRandomRecipe();
+                        }}
                     />
                 </View>
             </View>
@@ -90,6 +93,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
+        fontWeight: "bold",
         marginTop: 480,
         marginLeft: 20,
         fontSize: 24,

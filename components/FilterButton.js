@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+import { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { ModelContext } from '../model/WhatTodayModel';
 import Demo from './Demo'
 
-export default function FilterButton() {
+export default function FilterButton({ filter }) {
+    const model = useContext(ModelContext);
 
     const [pressed, setPressed] = useState(false);
 
@@ -11,12 +14,19 @@ export default function FilterButton() {
     const colorStyle = pressed ? styles.textPressed : styles.textNotPressed;
 
     return (
-        <TouchableWithoutFeedback onPress={() => setPressed((prevPressed) => !prevPressed)}>
-            {/* <View style={styles.container}> */}
+        <TouchableWithoutFeedback onPress={() => {
+            setPressed((prevPressed) => !prevPressed);
+            if (pressed === false) {
+                model.addFilter(filter);
+                model.loadRandomRecipe();
+            } else {
+                model.removeFilter(filter);
+                model.loadRandomRecipe();
+            }
+        }}>
             <View style={[styles.button, extraStyle]}>
-                <Text style={[styles.buttonText, colorStyle]}>Vegan</Text>
+                <Text style={[styles.buttonText, colorStyle]}>{filter}</Text>
             </View>
-            {/* </View> */}
         </TouchableWithoutFeedback>
     )
 }
@@ -31,8 +41,8 @@ const styles = StyleSheet.create({
     button: {
         flex: 1,
         margin: 4,
-        height: 22,
-        borderWidth: 0.1,
+        height: 23,
+        //borderWidth: 0.1,
         borderRadius: 15,
         paddingVertical: 8,
         paddingHorizontal: 18,
@@ -49,7 +59,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textTransform: 'uppercase',
         textAlign: 'center',
-        fontSize: 9,
+        fontSize: 12,
     },
     textNotPressed: {
         color: "#F23838",
