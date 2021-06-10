@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import { ModelContext } from '../model/WhatTodayModel';
-import Demo from './Demo'
 
 export default function FilterButton({ filter }) {
     const model = useContext(ModelContext);
@@ -32,17 +31,9 @@ export default function FilterButton({ filter }) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        backgroundColor: 'black',
-    },
     button: {
-        flex: 1,
         margin: 4,
-        height: 23,
-        //borderWidth: 0.1,
+        height: 24,
         borderRadius: 15,
         paddingVertical: 8,
         paddingHorizontal: 18,
@@ -60,6 +51,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         textAlign: 'center',
         fontSize: 12,
+        alignItems: 'stretch',
     },
     textNotPressed: {
         color: "#F23838",

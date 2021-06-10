@@ -2,10 +2,12 @@ import { observer } from 'mobx-react';
 import React from 'react'
 import { useEffect } from 'react';
 import { useContext } from 'react';
-import { View, Text, StyleSheet, Button, ActivityIndicator } from 'react-native'
-import CardCreation from '../components/Cards';
+import { View, Text, StyleSheet, Button, ActivityIndicator, ScrollView, Dimensions, TouchableOpacity } from 'react-native'
+import Cards from '../components/Cards';
 import FilterButton from '../components/FilterButton';
 import { ModelContext } from '../model/WhatTodayModel';
+import VerifyButton from '../components/VerifyButton';
+import HomeBackground from '../components/icons/HomeBackground';
 
 const HomeScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
@@ -23,34 +25,96 @@ const HomeScreen = observer(({ navigation }) => {
     }
 
     return (
-        <View style={styles.screen}>
-            <View style={styles.filtersContainer}>
-                <FilterButton filter="Mexican" />
-                <FilterButton filter="Irish" />
-                <FilterButton filter="Spanish" />
-                <FilterButton filter="African" />
+        <View>
+            <HomeBackground style={styles.bg} />
+            <View style={styles.screen}>
+                <ScrollView horizontal={true} style={styles.filtersContainer}>
+                    <FilterButton filter="Mexican" />
+                    <FilterButton filter="Irish" />
+                    <FilterButton filter="Spanish" />
+                    <FilterButton filter="African" />
+                    <FilterButton filter="Nordic" />
+                </ScrollView>
+                    <Cards /> 
+                    <View style={styles.fade1}></View>
+                    <View style={styles.fade2}></View>
+                    <View style={styles.butcontainer}>
+                        <View style={styles.button}>
+                        <TouchableOpacity onPress={() => model.loadRandomRecipe()}>
+                                <VerifyButton type={false} />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => {
+                                    model.addFavRecipe(model.randomRecipe[0].id, model.randomRecipe[0].title);
+                                    model.loadRandomRecipe();
+                                }}>
+                                <VerifyButton type={true} size={"big"} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
             </View>
-            <CardCreation />
         </View>
     )
 });
 
 export default HomeScreen;
 
+const screenWidth = Dimensions.get("window").width;
+
+const screenHeight = Dimensions.get("window").height;
+
+
+
 const styles = StyleSheet.create({
+    bg:{
+        position: 'absolute',
+        top: screenHeight*(0.5/4),
+    },
     screen: {
-        flex: 1,
         flexDirection: 'column',
+        alignItems: "center"
     },
     emptyScreen: {
         justifyContent: "center",
         alignItems: "center"
     },
     filtersContainer: {
-        flex: 1,
         flexDirection: 'row',
         alignContent: 'space-around',
         marginHorizontal: 12,
         marginVertical: 15,
-    }
+    },
+    fade1: {
+        width: screenWidth*(4/5),
+        height: 200,
+        backgroundColor: 'rgba(255,170,147,1)',
+        zIndex: -1,
+        borderRadius: 15,
+        position: 'absolute',
+        top: '11%',
+    },
+    fade2: {
+        width: screenWidth*(3.5/5),
+        height: 200,
+        backgroundColor: 'rgba(255,214,203,1)',
+        zIndex: -2,
+        borderRadius: 15,
+        position: 'absolute',
+        top: '9.6%',
+    },
+    butcontainer: {
+        alignContent: 'center',
+        alignItems: 'center',
+        height: 50,
+        width: 360,
+        marginTop: screenHeight*(2.8/4),
+    },
+    button: {
+        width: screenWidth,
+        padding: 6,
+        position: 'absolute',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        bottom: 0,
+    },
 })
