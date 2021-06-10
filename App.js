@@ -5,6 +5,7 @@ import React from 'react';
 import { ActivityIndicator, StatusBar, StyleSheet, View } from "react-native";
 import MainBottomTabNav from "./components/MainBottomTabNav";
 import { ModelProvider } from "./model/WhatTodayModel";
+import SignUpScreen from "./screens/SignUpScreen";
 
 const Stack = createStackNavigator();
 
@@ -27,7 +28,8 @@ export default function App() {
     <ModelProvider>
       <NavigationContainer>
         <StatusBar></StatusBar>
-        <Stack.Navigator initialRouteName="TabNav" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="SignUp" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="TabNav" component={MainBottomTabNav} />
           {/* <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }} /> */}
           {/* <Stack.Screen name="screentwo" component={ScreenTwo} /> */}

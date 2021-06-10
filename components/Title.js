@@ -5,7 +5,7 @@ import Demo from './Demo'
 //---------------------------------//
 
 const iterations = 10;
-const textSize = 50;
+const textSize = 64;
 const shadowBlur = 2;
 const primaryColor = "#FC633A";
 
@@ -21,20 +21,18 @@ const textsGenerator = (iter, element) => {
 
 //---------------------------------//
 
-export default function Title({ children, blank, centered }) {
+export default function Title({ children }) {
 
     const shadowText = <Text style={[styles.text, styles.absolutPosition]}>{children}</Text>;
     const shadowContent = textsGenerator(iterations, shadowText);
 
     return (
-        <Demo blank={blank} centered={centered}>
-            <View style={styles.container}>
-                <Text style={styles.text}>
-                    {children}
-                </Text>
-                {shadowContent}
-            </View>
-        </Demo>
+        <View style={styles.container}>
+            <Text style={styles.text}>
+                {children}
+            </Text>
+            {shadowContent}
+        </View>
     )
 
 }
@@ -43,10 +41,9 @@ export default function Title({ children, blank, centered }) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        padding: 10
+        /* backgroundColor: 'blue', */
     },
     text: {
         color: "white",
@@ -55,6 +52,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Bold',
         textShadowColor: primaryColor,
         textShadowRadius: shadowBlur,
+        marginVertical: 25,
     },
     absolutPosition: {
         position: "absolute",
