@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import React, { useContext, useRef } from "react";
-import { Animated, PanResponder, StyleSheet, View, Image, Button, Alert, Text, IconButton } from "react-native";
+import { Animated, PanResponder, StyleSheet, View, Image, Button, Alert, Text, IconButton, Dimensions } from "react-native";
 import { ModelContext } from "../model/WhatTodayModel";
 
 const DraggableView = observer(() => {
@@ -53,6 +53,9 @@ const DraggableView = observer(() => {
     );
 });
 
+const screenHeight = Dimensions.get("window").height;
+const boxHeight = screenHeight*(14/19);
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -65,13 +68,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         backgroundColor: "#61dafb",
         width: 350,
-        height: 550,
+        height: boxHeight,
         borderRadius: 20,
     },
 
     picture: {
         width: 350,
-        height: 550,
+        height: '100%',
         borderRadius: 20,
         alignItems: "center",
     },
