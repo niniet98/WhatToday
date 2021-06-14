@@ -3,7 +3,8 @@ import React, { createContext } from "react";
 
 
 const URL_BASE = 'https://api.spoonacular.com';
-const apiKey = "6b7427f391974de5921bcd793e67086e";
+//const apiKey = "6b7427f391974de5921bcd793e67086e";
+const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
 const numberOfRecipes = 1;  //anirem d'una en una
 
 
@@ -24,10 +25,10 @@ class WhatTodayModel {
         })
     }
 
-    addFavRecipe(idParam, titleParam) {
+    addFavRecipe(idParam, imageParam) {
         this.favRecipes.push({
             id: idParam,
-            title: titleParam
+            img: imageParam
         });
     }
 

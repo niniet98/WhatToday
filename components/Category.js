@@ -9,34 +9,26 @@ export default function Category({ children }) {
     const extraStyle = pressed ? styles.buttonPressed : styles.buttonNotPressed;
 
     return (
-        <Demo>
-            <View style={styles.container}>
-                <TouchableWithoutFeedback onPress={() => setPressed(prevState => !prevState)}>
-                    <View style={[styles.button, extraStyle]}>
-                        <Text style={styles.text}>{children}</Text>
-                    </View>
-                </TouchableWithoutFeedback>
+        
+        <TouchableWithoutFeedback onPress={() => setPressed(prevState => !prevState)}>
+            <View style={[styles.button, extraStyle]}>
+                <Text style={styles.text}>{children}</Text>
             </View>
-        </Demo>
+        </TouchableWithoutFeedback>
+        
     )
 }
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        justifyContent: "center",
-        alignItems: "center",
-        /* backgroundColor: "#FC633A" */
-    },
     button: {
         width: 98,
         height: 98,
         borderRadius: 25,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "white"
+        backgroundColor: "white",
+        margin: 10,
     },
     text: {
         color: "#F23838",

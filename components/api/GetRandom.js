@@ -17,7 +17,7 @@ export default function GetRandom() {
     const [recipes, setRecipes] = useState(null);
 
     const loadRecipes = async () => {
-        const response = await fetch(`${URL_BASE}/recipes/random/?apiKey=6b7427f391974de5921bcd793e67086e&number=12`);
+        const response = await fetch(`${URL_BASE}/recipes/random/?apiKey=19029611d889407a81d175e7ffbebd9f&number=12`);
         const json = await response.json();
         setRecipes(json.recipes);
     };

@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useFonts } from "expo-font";
 import React from 'react';
 import { ActivityIndicator, StatusBar, StyleSheet, View } from "react-native";
+import InfoDetallada from "./components/InfoDetallada";
 import MainBottomTabNav from "./components/MainBottomTabNav";
 import { ModelProvider } from "./model/WhatTodayModel";
 import SignUpScreen from "./screens/SignUpScreen";
@@ -28,9 +29,10 @@ export default function App() {
     <ModelProvider>
       <NavigationContainer>
         <StatusBar></StatusBar>
-        <Stack.Navigator initialRouteName="SignUp" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="TabNav" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="TabNav" component={MainBottomTabNav} />
+          <Stack.Screen name="Info" component={InfoDetallada} />
           {/* <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }} /> */}
           {/* <Stack.Screen name="screentwo" component={ScreenTwo} /> */}
         </Stack.Navigator>

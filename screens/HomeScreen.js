@@ -44,7 +44,7 @@ const HomeScreen = observer(({ navigation }) => {
                                 <VerifyButton type={false} />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {
-                                    model.addFavRecipe(model.randomRecipe[0].id, model.randomRecipe[0].title);
+                                    model.addFavRecipe(model.randomRecipe[0].id, model.randomRecipe[0].image);
                                     model.loadRandomRecipe();
                                 }}>
                                 <VerifyButton type={true} size={"big"} />
