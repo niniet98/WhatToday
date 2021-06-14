@@ -4,7 +4,6 @@ import { View, ScrollView, Text, Button, StyleSheet, Dimensions, Image, Touchabl
 import { FlatList } from 'react-native-gesture-handler';
 import CategoriesBG from '../components/icons/categoriesBG';
 import { ModelContext } from '../model/WhatTodayModel';
-import InfoDetallada from '../components/InfoDetallada';
 import LinearGradient from 'react-native-linear-gradient'
 import Category from '../components/Category'
 
@@ -23,12 +22,18 @@ const SaveScreen = observer(({ navigation }) => {
             <FlatList 
             data={model.favRecipes}
             renderItem={({ item, index }) => (
+                index % 3 == 1 ? 
                 <TouchableOpacity onPress={() => 
-                    /* navigation.navigate("Info", {id: item.id}); */
-                    alert("hello")
+                    navigation.navigate("Info", {id: item.id})
                 }>
                   <Recipe key={item.id} img={item.img} counter={index} />
-                </TouchableOpacity>)}
+                </TouchableOpacity> : 
+                <TouchableOpacity style={styles.columnaSenar} onPress={() => 
+                    navigation.navigate("Info", {id: item.id})
+                }>
+                  <Recipe key={item.id} img={item.img} counter={index} />
+                </TouchableOpacity>
+                )}
             numColumns={numColumns} 
         />
             <View style={styles.categoriesContainer}>
@@ -38,7 +43,7 @@ const SaveScreen = observer(({ navigation }) => {
                 <Category children='DESSERTS'/>
                 <Category children='VEGAN'/>
 
-            </View> 
+            </View>
             {/*         <View>
             <LinearGradient style={{width:200,height:200}} colors={['red', 'yellow', 'green' ]}>
                 <Text>Vertical Gradient</Text>
@@ -101,5 +106,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop:50    
     },
+    columnaSenar:{
+        marginTop:50,
+    }
 
 })

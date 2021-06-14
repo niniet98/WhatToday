@@ -4,7 +4,8 @@ import React, { createContext } from "react";
 
 const URL_BASE = 'https://api.spoonacular.com';
 //const apiKey = "6b7427f391974de5921bcd793e67086e";
-const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
+//const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
+const apiKey = "f8b7ed4858454125a22606a37be0b9d0"; //apiKey mario 2
 const numberOfRecipes = 1;  //anirem d'una en una
 
 
@@ -13,6 +14,7 @@ class WhatTodayModel {
         this.randomRecipe = null;   //recepta que es mostra en la card en cada moment
         this.favRecipes = [];      //aqui anem guardant totes les receptes Likeadas
         this.filters = [];       //array per guardar els filtres (de moment filtres de paisos per ferho mes facil, despres ja podem canviar)
+        this.recipeInfo = [];
 
         makeObservable(this, {
             randomRecipe: observable,
@@ -21,7 +23,9 @@ class WhatTodayModel {
             addFavRecipe: action,
             loadRandomRecipe: action,
             addFilter: action,
-            removeFilter: action
+            removeFilter: action,
+            recipeInfo: observable,
+            getRecipeInfo: action
         })
     }
 
@@ -56,6 +60,13 @@ class WhatTodayModel {
             this.randomRecipe = json.results;
         }
 
+    }
+
+    async getRecipeInfo({id}){
+        const response = await fetch(`${URL_BASE}/recipes/${id}/information?apiKey=${apiKey}&includeNutrition=true`);
+        this.recipeInfo = await response.json();
+        console.log(`${URL_BASE}/recipes/${id}/information?apiKey=${apiKey}&includeNutrition=true`);
+        console.log(this.recipeInfo);
     }
 
 }
