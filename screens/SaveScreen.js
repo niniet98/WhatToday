@@ -4,14 +4,14 @@ import { View, ScrollView, Text, Button, StyleSheet, Dimensions, Image, Touchabl
 import { FlatList } from 'react-native-gesture-handler';
 import CategoriesBG from '../components/icons/categoriesBG';
 import { ModelContext } from '../model/WhatTodayModel';
-import LinearGradient from 'react-native-linear-gradient'
+/* import LinearGradient from 'react-native-linear-gradient' */
 import Category from '../components/Category'
 
 const numColumns = 3;
 const Recipe = ({ img, counter }) => (
-    counter%2==0 ?
-    <View style={[styles.recipe, styles.rotationRight]}><Image style={styles.picture} source={{ uri: img }} /></View>:
-    <View style={[styles.recipe, styles.rotationLeft]}><Image style={styles.picture} source={{ uri: img }} /></View>
+    counter % 2 == 0 ?
+        <View style={[styles.recipe, styles.rotationRight]}><Image style={styles.picture} source={{ uri: img }} /></View> :
+        <View style={[styles.recipe, styles.rotationLeft]}><Image style={styles.picture} source={{ uri: img }} /></View>
 );
 
 const SaveScreen = observer(({ navigation }) => {
@@ -19,29 +19,29 @@ const SaveScreen = observer(({ navigation }) => {
 
     return (
         <View style={styles.screen}>
-            <FlatList 
-            data={model.favRecipes}
-            renderItem={({ item, index }) => (
-                index % 3 == 1 ? 
-                <TouchableOpacity onPress={() => 
-                    navigation.navigate("Info", {id: item.id})
-                }>
-                  <Recipe key={item.id} img={item.img} counter={index} />
-                </TouchableOpacity> : 
-                <TouchableOpacity style={styles.columnaSenar} onPress={() => 
-                    navigation.navigate("Info", {id: item.id})
-                }>
-                  <Recipe key={item.id} img={item.img} counter={index} />
-                </TouchableOpacity>
+            <FlatList
+                data={model.favRecipes}
+                renderItem={({ item, index }) => (
+                    index % 3 == 1 ?
+                        <TouchableOpacity onPress={() =>
+                            navigation.navigate("Info", { id: item.id })
+                        }>
+                            <Recipe key={item.id} img={item.img} counter={index} />
+                        </TouchableOpacity> :
+                        <TouchableOpacity style={styles.columnaSenar} onPress={() =>
+                            navigation.navigate("Info", { id: item.id })
+                        }>
+                            <Recipe key={item.id} img={item.img} counter={index} />
+                        </TouchableOpacity>
                 )}
-            numColumns={numColumns} 
-        />
+                numColumns={numColumns}
+            />
             <View style={styles.categoriesContainer}>
-                <Category children='PASTA'/>
-                <Category children='MEAT'/>
-                <Category children='FISH'/>
-                <Category children='DESSERTS'/>
-                <Category children='VEGAN'/>
+                <Category children='PASTA' />
+                <Category children='MEAT' />
+                <Category children='FISH' />
+                <Category children='DESSERTS' />
+                <Category children='VEGAN' />
 
             </View>
             {/*         <View>
@@ -74,17 +74,17 @@ const styles = StyleSheet.create({
         top: 0,
     },
     recipe: {
-        width: screenWidth*(97/375),
-        height: screenHeight*(5/23),
+        width: screenWidth * (97 / 375),
+        height: screenHeight * (5 / 23),
         borderRadius: 20,
         margin: 10,
-        flex: 1/numColumns,
+        flex: 1 / numColumns,
         elevation: 10,
     },
-    rotationRight:{
+    rotationRight: {
         transform: [{ rotate: `${rotation}deg` }],
     },
-    rotationLeft:{
+    rotationLeft: {
         transform: [{ rotate: `-${rotation}deg` }],
 
     },
@@ -93,21 +93,21 @@ const styles = StyleSheet.create({
         height: '100%',
         borderRadius: 20,
         alignItems: "center",
-        
+
     },
-     categoriesContainer:{
-        backgroundColor: 'red', 
-        height:400, 
-        width: screenWidth, 
-        borderTopLeftRadius:20, 
-        borderTopRightRadius:20,
+    categoriesContainer: {
+        backgroundColor: 'red',
+        height: 400,
+        width: screenWidth,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
         flexWrap: 'wrap',
-        flexDirection: 'row',  
+        flexDirection: 'row',
         justifyContent: 'center',
-        paddingTop:50    
+        paddingTop: 50
     },
-    columnaSenar:{
-        marginTop:50,
+    columnaSenar: {
+        marginTop: 50,
     }
 
 })

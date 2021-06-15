@@ -6,6 +6,7 @@ import { ActivityIndicator, StatusBar, StyleSheet, View } from "react-native";
 import InfoScreen from "./screens/InfoScreen";
 import MainBottomTabNav from "./components/MainBottomTabNav";
 import { ModelProvider } from "./model/WhatTodayModel";
+import LogInScreen from "./screens/LogInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import ReturnHeaderButton from "./components/ReturnHeaderButton";
 
@@ -30,9 +31,10 @@ export default function App() {
     <ModelProvider>
       <NavigationContainer>
         <StatusBar></StatusBar>
-        <Stack.Navigator initialRouteName="TabNav" screenOptions={{ headerTitle: null, headerTransparent: true }}>
+        <Stack.Navigator initialRouteName="LogIn" screenOptions={{ headerTitle: null, headerTransparent: true }}>
+          <Stack.Screen name="LogIn" component={LogInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
-          <Stack.Screen name="TabNav" component={MainBottomTabNav} />
+          <Stack.Screen name="TabNav" component={MainBottomTabNav} options={{ headerLeft: null, headerTransparent: true }} />
           <Stack.Screen name="Info" component={InfoScreen} options={{
             headerLeft: ({ navigation }) => (
               <ReturnHeaderButton onPress={() => navigation.goBack()} />

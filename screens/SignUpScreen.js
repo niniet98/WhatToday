@@ -1,22 +1,21 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TextInput, Button, TouchableWithoutFeedback } from 'react-native'
 import Title from '../components/Title';
-import { createUserDocument, fire } from '../database/firebase';
+import { auth, createUserDocument } from '../database/firebase';
 
-export default function SignUpScreen() {
-    /* const [userName, setUserName] = useState(null);
+export default function SignUpScreen({ navigation }) {
+    const [userName, setUserName] = useState(null);
     const [email, setEmail] = useState(null);
     const [pass, setPass] = useState(null);
-    const [confirmPass, setConfirmPass] = useState(null); */
+    const [confirmPass, setConfirmPass] = useState(null);
 
-    const handleSignUp = async (e) => {
-        e.preventDefault();
-        const { email, pass, userName, confirmPass } = e.target.elements;
+    const handleSignUp = async () => {
         console.log(userName, email, pass, confirmPass);
         if (pass === confirmPass) {
             try {
-                const { user } = await fire.auth().createUserWithEmailAndPassword(email.value, pass.value);
+                const { user } = await auth.createUserWithEmailAndPassword(email, pass);
                 await createUserDocument(user, userName);
+                navigation.navigate('TabNav');
             } catch (error) {
                 alert(`ERROR: ${error}`);
             }
@@ -28,10 +27,10 @@ export default function SignUpScreen() {
     return (
         <View style={styles.container}>
             <Title>Sign Up</Title>
-            <TextInput name="userName" placeholder="User Name" style={styles.textInput} /* value={userName} onChangeText={(newText) => setUserName(newText)} */ />
-            <TextInput name="email" placeholder="Email" style={styles.textInput} /* value={email} onChangeText={(newText) => setEmail(newText)} */ />
-            <TextInput name="pass" placeholder="Password" style={styles.textInput} /* value={pass} onChangeText={(newText) => setPass(newText)} */ />
-            <TextInput name="confirmPass" placeholder="Repeat Password" style={styles.textInput} /* value={confirmPass} onChangeText={(newText) => setConfirmPass(newText)} */ />
+            <TextInput placeholder="User Name" style={styles.textInput} value={userName} onChangeText={(value) => setUserName(value)} />
+            <TextInput placeholder="Email" style={styles.textInput} value={email} onChangeText={(value) => setEmail(value)} />
+            <TextInput placeholder="Password" style={styles.textInput} value={pass} onChangeText={(value) => setPass(value)} />
+            <TextInput placeholder="Repeat Password" style={styles.textInput} value={confirmPass} onChangeText={(value) => setConfirmPass(value)} />
             <TouchableWithoutFeedback onPress={handleSignUp}>
                 <View style={styles.confirmBtn}>
                     <Text style={styles.buttonText}>Confirm</Text>

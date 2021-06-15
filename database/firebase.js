@@ -1,8 +1,9 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
+import 'firebase/storage'
 
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyCVfxzJvOxBkEBIDGybDLNpQs9GHsInkyE",
     authDomain: "whattoday-c2b35.firebaseapp.com",
     projectId: "whattoday-c2b35",
@@ -15,15 +16,16 @@ var firebaseConfig = {
 const fire = firebase.initializeApp(firebaseConfig);
 const auth = fire.auth();
 const db = fire.firestore();
+const fbStorage = fire.storage();
 
-export { auth, db };
+export { fire, auth, db, fbStorage };
 
 export const createUserDocument = async (user, additionalData) => {
     if (!user) return;
     console.log(user.uid);
     console.log('additional', additionalData);
 
-    const UserRef = firestore.doc(`users/${user.uid}`);
+    const userRef = db.doc(`users/${user.uid}`);
     const snapshot = await userRef.get();
 
     if (!snapshot.exists) {
