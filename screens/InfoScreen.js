@@ -20,10 +20,10 @@ const InfoScreen = observer(({navigation, route}) => {
                 <View style={styles.tags}>
                     <InfoTag children={`${model.recipeInfo.readyInMinutes} min`} />
                     <InfoTag children={`${model.recipeInfo.servings} servings`} />
-                </View>  
+                </View>   
                 <Text style={[styles.title, {marginTop:20}]}>{model.recipeInfo.title}</Text>
-                <Text style={styles.title}>{model.recipeInfo.nutrition.nutrients[0].amount}Kcal</Text> 
-                <Text style={styles.summary}>{model.recipeInfo.summary}</Text>
+                {/* <Text style={styles.title}>{model.recipeInfo.nutrition.nutrients[0].amount}Kcal</Text>  */}
+                <Text style={styles.summary}>{model.recipeInfo.summary}</Text> 
                 <InfoDetalladaBG style={styles.svg} />
             </View>
             
