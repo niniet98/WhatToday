@@ -4,8 +4,8 @@ import { View, ScrollView, Text, Button, StyleSheet, Dimensions, Image, Touchabl
 import { FlatList } from 'react-native-gesture-handler';
 import CategoriesBG from '../components/icons/categoriesBG';
 import { ModelContext } from '../model/WhatTodayModel';
-/* import LinearGradient from 'react-native-linear-gradient' */
-import Category from '../components/Category'
+import Category from '../components/Category';
+import { LinearGradient } from 'expo-linear-gradient'
 
 const numColumns = 3;
 const Recipe = ({ img, counter }) => (
@@ -36,20 +36,19 @@ const SaveScreen = observer(({ navigation }) => {
                 )}
                 numColumns={numColumns}
             />
-            <View style={styles.categoriesContainer}>
+            {/* <CategoriesBG style={styles.categoriesContainer} /> */}
+            <LinearGradient
+            // Button Linear Gradient
+            colors={['#F23838', '#FCB13A']}
+            start={[1,0]}
+            end={[0,1]}
+            style={styles.categoriesContainer}>
                 <Category children='PASTA' />
                 <Category children='MEAT' />
                 <Category children='FISH' />
                 <Category children='DESSERTS' />
                 <Category children='VEGAN' />
-
-            </View>
-            {/*         <View>
-            <LinearGradient style={{width:200,height:200}} colors={['red', 'yellow', 'green' ]}>
-                <Text>Vertical Gradient</Text>
             </LinearGradient>
-        </View> */}
-            {/* <CategoriesBG style={styles.categoriesContainer} /> */}
         </View>
     )
 });
