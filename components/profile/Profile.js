@@ -4,13 +4,13 @@ import Demo from '../Demo'
 
 export default function Profile() {
     return (
-        <View>
+        <View style={{ backgroundColor: "white" }}>
             <View style={{ marginHorizontal: 20, marginBottom: 60 }}>
                 <Text style={[styles.fontText, { fontSize: 18 }]}>ayelen_97</Text>
             </View>
             <View style={styles.container}>
                 <View style={styles.column}>
-                    <Text style={styles.text, styles.fontText}>13</Text>
+                    <Text style={styles.text, styles.fontText}>10</Text>
                     <Text style={styles.text, styles.fontText}>Posts</Text>
                 </View>
                 <View style={styles.column}>
@@ -43,9 +43,11 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50,
+        elevation: 10
     },
     fontText: {
         fontFamily: 'Poppins-Bold',
+        fontWeight: "bold",
         color: '#F23838'
     },
     text: {

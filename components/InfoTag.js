@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         justifyContent: 'center',
         backgroundColor: 'rgba(255,255,255,0.85)',
+        elevation: 3
     },
     text: {
         fontFamily: 'Poppins-Bold',

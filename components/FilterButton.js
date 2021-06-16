@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         paddingHorizontal: 18,
         justifyContent: 'center',
+        elevation: 3.5,
     },
     buttonNotPressed: {
         backgroundColor: '#FFFFFF',

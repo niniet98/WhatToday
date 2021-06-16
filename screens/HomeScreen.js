@@ -25,7 +25,7 @@ const HomeScreen = observer(({ navigation }) => {
     }
 
     return (
-        <View>
+        <View style={{ backgroundColor: "white" }}>
             <HomeBackground style={styles.bg} />
             <View style={styles.screen}>
                 <ScrollView horizontal={true} style={styles.filtersContainer}>
@@ -38,24 +38,23 @@ const HomeScreen = observer(({ navigation }) => {
                     <FilterButton filter="Nordic" />
                     <FilterButton filter="Irish" />
                     <FilterButton filter="British" />
-                    
                 </ScrollView>
-                    <Cards /> 
-                    <View style={styles.fade1}></View>
-                    <View style={styles.fade2}></View>
-                    <View style={styles.butcontainer}>
-                        <View style={styles.button}>
+                <Cards />
+                <View style={styles.fade1}></View>
+                <View style={styles.fade2}></View>
+                <View style={styles.butcontainer}>
+                    <View style={styles.button}>
                         <TouchableOpacity onPress={() => model.loadRandomRecipe()}>
-                                <VerifyButton type={false} />
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => {
-                                    model.addFavRecipe(model.randomRecipe[0].id, model.randomRecipe[0].image);
-                                    model.loadRandomRecipe();
-                                }}>
-                                <VerifyButton type={true} size={"big"} />
-                            </TouchableOpacity>
-                        </View>
+                            <VerifyButton type={false} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => {
+                            model.addFavRecipe(model.randomRecipe[0].id, model.randomRecipe[0].image);
+                            model.loadRandomRecipe();
+                        }}>
+                            <VerifyButton type={true} size={"big"} />
+                        </TouchableOpacity>
                     </View>
+                </View>
             </View>
         </View>
     )
@@ -70,17 +69,19 @@ const screenHeight = Dimensions.get("window").height;
 
 
 const styles = StyleSheet.create({
-    bg:{
+    bg: {
         position: 'absolute',
-        top: screenHeight*(0.5/4),
+        top: screenHeight * (0.5 / 4),
     },
     screen: {
         flexDirection: 'column',
         alignItems: "center"
     },
     emptyScreen: {
+        flex: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        backgroundColor: "white"
     },
     filtersContainer: {
         flexDirection: 'row',
@@ -89,29 +90,31 @@ const styles = StyleSheet.create({
         marginVertical: 15,
     },
     fade1: {
-        width: screenWidth*(4/5),
+        width: screenWidth * (4 / 5),
         height: 200,
         backgroundColor: 'rgba(255,170,147,1)',
         zIndex: -1,
         borderRadius: 15,
         position: 'absolute',
         top: '11%',
+        elevation: 2,
     },
     fade2: {
-        width: screenWidth*(3.5/5),
+        width: screenWidth * (3.5 / 5),
         height: 200,
         backgroundColor: 'rgba(255,214,203,1)',
         zIndex: -2,
         borderRadius: 15,
         position: 'absolute',
         top: '9.6%',
+        elevation: 2,
     },
     butcontainer: {
         alignContent: 'center',
         alignItems: 'center',
         height: 50,
         width: 360,
-        marginTop: screenHeight*(2.8/4),
+        marginTop: screenHeight * (2.8 / 4),
     },
     button: {
         width: screenWidth,

@@ -11,16 +11,17 @@ export default function ReturnHeaderButton() {
 }
 
 const containerSize = 30;
-const radius = containerSize/2;
+const radius = containerSize / 2;
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         width: containerSize,
         height: containerSize,
         borderRadius: radius,
         backgroundColor: 'rgba(255,255,255,0.85)',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: 20
+        margin: 20,
+        elevation: 7
     }
 })

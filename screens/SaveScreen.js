@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         margin: 10,
         flex: 1 / numColumns,
-        elevation: 10,
+        elevation: 5,
     },
     rotationRight: {
         transform: [{ rotate: `${rotation}deg` }],
@@ -96,15 +96,16 @@ const styles = StyleSheet.create({
 
     },
     categoriesContainer: {
-        backgroundColor: 'red',
-        height: 400,
+        backgroundColor: '#FC633A',
+        height: 360,
         width: screenWidth,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
         flexWrap: 'wrap',
         flexDirection: 'row',
         justifyContent: 'center',
-        paddingTop: 50
+        paddingTop: 40,
+        elevation: 7,
     },
     columnaSenar: {
         marginTop: 50,

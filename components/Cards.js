@@ -6,24 +6,24 @@ import { ModelContext } from "../model/WhatTodayModel";
 const Cards = observer(() => {
     const model = useContext(ModelContext);
     //-------------------//
-/*     const pan = useRef(new Animated.ValueXY()).current;
-
-    const panResponder = PanResponder.create({
-        onStartShouldSetPanResponder: () => true,
-        onPanResponderMove: Animated.event([
-            null,
-            {
-                dx: pan.x, // x,y are Animated.Value
-                dy: pan.y,
+    /*     const pan = useRef(new Animated.ValueXY()).current;
+    
+        const panResponder = PanResponder.create({
+            onStartShouldSetPanResponder: () => true,
+            onPanResponderMove: Animated.event([
+                null,
+                {
+                    dx: pan.x, // x,y are Animated.Value
+                    dy: pan.y,
+                },
+            ]),
+            onPanResponderRelease: () => {
+                Animated.spring(
+                    pan, // Auto-multiplexed
+                    { toValue: { x: 0, y: 0 } } // Back to zero
+                ).start();
             },
-        ]),
-        onPanResponderRelease: () => {
-            Animated.spring(
-                pan, // Auto-multiplexed
-                { toValue: { x: 0, y: 0 } } // Back to zero
-            ).start();
-        },
-    }); */
+        }); */
 
     return (
         <View style={styles.container}>
@@ -36,17 +36,17 @@ const Cards = observer(() => {
             </Animated.View> */}
             <View style={styles.box}>
                 <Image style={styles.picture} source={{ uri: model.randomRecipe[0].image }} />
-                <Text style={styles.text}>{model.randomRecipe[0].title}, {model.randomRecipe[0].nutrition.nutrients[0].amount} Kcal</Text>
+                <Text style={styles.text}>{model.randomRecipe[0].title}, {Math.round(model.randomRecipe[0].nutrition.nutrients[0].amount)} Kcal</Text>
             </View>
         </View>
     );
 });
 
 const screenHeight = Dimensions.get("window").height;
-const boxHeight = screenHeight*(2.8/4);
+const boxHeight = screenHeight * (2.8 / 4);
 
 const screenWidth = Dimensions.get("window").width;
-const boxWidth = screenWidth*(9/10);
+const boxWidth = screenWidth * (9 / 10);
 
 const styles = StyleSheet.create({
     container: {
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
         width: boxWidth,
         height: boxHeight,
         borderRadius: 20,
+        elevation: 5,
     },
 
     picture: {
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
 
     text: {
         fontWeight: "bold",
-        top: boxHeight*(8/10),
+        top: boxHeight * (8 / 10),
         marginLeft: 20,
         fontSize: 24,
         position: 'absolute',

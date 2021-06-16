@@ -9,13 +9,13 @@ export default function Category({ children }) {
     const extraStyle = pressed ? styles.buttonPressed : styles.buttonNotPressed;
 
     return (
-        
+
         <TouchableWithoutFeedback onPress={() => setPressed(prevState => !prevState)}>
             <View style={[styles.button, extraStyle]}>
                 <Text style={styles.text}>{children}</Text>
             </View>
         </TouchableWithoutFeedback>
-        
+
     )
 }
 
@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
-        margin: 10,
+        margin: 7,
+        elevation: 5,
     },
     text: {
         color: "#F23838",
