@@ -18,7 +18,7 @@ const HomeScreen = observer(({ navigation }) => {
 
     if (model.randomRecipe === null) {
         return (
-            <View style={[styles.screen, styles.emptyScreen]}>
+            <View style={styles.emptyScreen}>
                 <ActivityIndicator size="large" color="#FC633A" />
             </View>
         )
@@ -30,10 +30,15 @@ const HomeScreen = observer(({ navigation }) => {
             <View style={styles.screen}>
                 <ScrollView horizontal={true} style={styles.filtersContainer}>
                     <FilterButton filter="Mexican" />
-                    <FilterButton filter="Irish" />
+                    <FilterButton filter="Japanese" />
+                    <FilterButton filter="American" />
                     <FilterButton filter="Spanish" />
+                    <FilterButton filter="Chinese" />
                     <FilterButton filter="African" />
                     <FilterButton filter="Nordic" />
+                    <FilterButton filter="Irish" />
+                    <FilterButton filter="British" />
+                    
                 </ScrollView>
                     <Cards /> 
                     <View style={styles.fade1}></View>
@@ -113,7 +118,7 @@ const styles = StyleSheet.create({
         padding: 6,
         position: 'absolute',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         alignItems: 'center',
         bottom: 0,
     },

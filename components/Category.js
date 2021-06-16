@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
         color: "#F23838",
         fontSize: 14,
         fontFamily: 'Poppins-Bold',
-        textAlign: "center"
+        textAlign: "center",
+        fontWeight: 'bold',
     },
     buttonPressed: {
         opacity: .65

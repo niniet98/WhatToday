@@ -1,11 +1,12 @@
 import { observer } from 'mobx-react';
-import React, { useContext, useEffect } from 'react'
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
+import React, { useContext, useEffect } from 'react';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ModelContext } from '../model/WhatTodayModel';
 import InfoDetalladaBG from '../components/icons/infoDetalladaBG';
-import InfoTag from '../components/InfoTag'
+import InfoTag from '../components/InfoTag';
+import ReturnHeaderButton from '../components/ReturnHeaderButton';
 
-const InfoScreen = observer(({navigation, route}) => {
+const InfoScreen = observer(({route, navigation: { goBack }}) => {
     const model = useContext(ModelContext);
     const {id} = route.params;
 
@@ -15,6 +16,9 @@ const InfoScreen = observer(({navigation, route}) => {
 
     return (
         <View style={styles.container}>
+            <TouchableOpacity style={styles.returnButton} onPress={() => goBack()}>
+                <ReturnHeaderButton  />
+            </TouchableOpacity>
             <Image style={styles.img} source={{ uri: model.recipeInfo.image }} />
             <View>
                 <View style={styles.tags}>
@@ -22,7 +26,7 @@ const InfoScreen = observer(({navigation, route}) => {
                     <InfoTag children={`${model.recipeInfo.servings} servings`} />
                 </View>   
                 <Text style={[styles.title, {marginTop:20}]}>{model.recipeInfo.title}</Text>
-                {/* <Text style={styles.title}>{model.recipeInfo.nutrition.nutrients[0].amount}Kcal</Text>  */}
+                {/* <Text style={styles.title}>{model.recipeInfo.nutrition.nutrients[0].amount}Kcal</Text>   */}
                 <Text style={styles.summary}>{model.recipeInfo.summary}</Text> 
                 <InfoDetalladaBG style={styles.svg} />
             </View>
@@ -70,5 +74,11 @@ const styles = StyleSheet.create({
         top: -80,
         alignItems: 'flex-end',
         right: 20
+    },
+    returnButton:{
+        zIndex: 2,
+        position: 'absolute',
+        top:0,
+        
     }
 })

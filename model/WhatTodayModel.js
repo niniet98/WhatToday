@@ -66,7 +66,7 @@ class WhatTodayModel {
         const response = await fetch(`${URL_BASE}/recipes/${id}/information?apiKey=${apiKey}&includeNutrition=true`);
         this.recipeInfo = await response.json();
         console.log(`${URL_BASE}/recipes/${id}/information?apiKey=${apiKey}&includeNutrition=true`);
-        console.log(this.recipeInfo);
+        
     }
 
 }

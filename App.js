@@ -31,15 +31,15 @@ export default function App() {
     <ModelProvider>
       <NavigationContainer>
         <StatusBar></StatusBar>
-        <Stack.Navigator initialRouteName="LogIn" screenOptions={{ headerTitle: null, headerTransparent: true }}>
+        <Stack.Navigator initialRouteName="TabNav" screenOptions={{ headerShown: false /* headerTitle: null, headerTransparent: true */ }}>
           <Stack.Screen name="LogIn" component={LogInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="TabNav" component={MainBottomTabNav} options={{ headerLeft: null, headerTransparent: true }} />
-          <Stack.Screen name="Info" component={InfoScreen} options={{
+          <Stack.Screen name="Info" component={InfoScreen} /* options={{
             headerLeft: ({ navigation }) => (
               <ReturnHeaderButton onPress={() => navigation.goBack()} />
             ),
-          }} />
+          }} */ />
           {/* <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }} /> */}
           {/* <Stack.Screen name="screentwo" component={ScreenTwo} /> */}
         </Stack.Navigator>
