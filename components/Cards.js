@@ -2,6 +2,7 @@ import { observer } from "mobx-react";
 import React, { useContext, useRef } from "react";
 import { Animated, PanResponder, StyleSheet, View, Image, Button, Alert, Text, IconButton, Dimensions } from "react-native";
 import { ModelContext } from "../model/WhatTodayModel";
+import { accentColor, primaryColor } from "../styles/styles";
 
 const Cards = observer(() => {
     const model = useContext(ModelContext);
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     },
     box: {
         position: 'absolute',
-        backgroundColor: "#FC633A",
+        backgroundColor: primaryColor,
         width: boxWidth,
         height: boxHeight,
         borderRadius: 20,
@@ -77,6 +78,8 @@ const styles = StyleSheet.create({
         fontSize: 24,
         position: 'absolute',
         color: 'white',
+        textShadowColor: accentColor,
+        textShadowRadius: 5
     }
 });
 

@@ -6,6 +6,7 @@ import CategoriesBG from '../components/icons/categoriesBG';
 import { ModelContext } from '../model/WhatTodayModel';
 import Category from '../components/Category';
 import { LinearGradient } from 'expo-linear-gradient'
+import { primaryColor } from '../styles/styles';
 
 const numColumns = 3;
 const Recipe = ({ img, counter }) => (
@@ -38,11 +39,11 @@ const SaveScreen = observer(({ navigation }) => {
             />
             {/* <CategoriesBG style={styles.categoriesContainer} /> */}
             <LinearGradient
-            // Button Linear Gradient
-            colors={['#F23838', '#FCB13A']}
-            start={[1,0]}
-            end={[0,1]}
-            style={styles.categoriesContainer}>
+                // Button Linear Gradient
+                colors={['#F23838', '#FCB13A']}
+                start={[1, 0]}
+                end={[0, 1]}
+                style={styles.categoriesContainer}>
                 <Category children='PASTA' />
                 <Category children='MEAT' />
                 <Category children='FISH' />
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
 
     },
     categoriesContainer: {
-        backgroundColor: '#FC633A',
+        backgroundColor: primaryColor,
         height: 360,
         width: screenWidth,
         borderTopLeftRadius: 30,

@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
+import { accentColor } from '../../styles/styles'
 import Demo from '../Demo'
 
 export default function Profile() {
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     fontText: {
         fontFamily: 'Poppins-Bold',
         fontWeight: "bold",
-        color: '#F23838'
+        color: accentColor
     },
     text: {
         fontSize: 10,

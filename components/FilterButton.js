@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import { ModelContext } from '../model/WhatTodayModel';
+import { accentColor } from '../styles/styles';
 
 export default function FilterButton({ filter }) {
     const model = useContext(ModelContext);
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
     },
     buttonPressed: {
-        backgroundColor: "#F23838",
+        backgroundColor: accentColor,
     },
     buttonText: {
         fontFamily: 'Poppins-Bold',
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
     },
     textNotPressed: {
-        color: "#F23838",
+        color: accentColor,
     },
     textPressed: {
         color: 'white',

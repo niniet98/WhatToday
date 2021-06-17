@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import { accentColor } from '../styles/styles';
 import Demo from './Demo'
 
 export default function Category({ children }) {
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     text: {
-        color: "#F23838",
+        color: accentColor,
         fontSize: 14,
         fontFamily: 'Poppins-Bold',
         textAlign: "center",
