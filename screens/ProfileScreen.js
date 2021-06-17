@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, FlatList } from 'react-native'
-import GetRandom from '../components/api/GetRandom'
-import IconButton from '../components/IconButton'
+import GetRecipes from '../components/profile/GetRecipes'
 import Profile from '../components/profile/Profile'
 import ProfileTabs from '../components/profile/ProfileTabs'
 
@@ -10,13 +9,9 @@ export default function ProfileScreen() {
         <View style={styles.container}>
             <View style={{ height: 10 }}></View>
             <Profile />
-            {/* <View style={styles.menu}>
-                <IconButton iconName={'grid'} />
-                <IconButton iconName={'chef'} />
-            </View> */}
             <ProfileTabs />
             <View style={{ height: 29 }}></View>
-            <GetRandom />
+            <GetRecipes />
         </View>
     )
 }

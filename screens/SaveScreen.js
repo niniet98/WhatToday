@@ -49,6 +49,7 @@ const SaveScreen = observer(({ navigation }) => {
                 <Category children='FISH' />
                 <Category children='DESSERTS' />
                 <Category children='VEGAN' />
+                <Category children='FAT' />
             </LinearGradient>
         </View>
     )

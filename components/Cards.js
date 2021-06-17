@@ -36,8 +36,10 @@ const Cards = observer(() => {
                 <Text style={styles.text}>{model.randomRecipe[0].title}, {model.randomRecipe[0].nutrition.nutrients[0].amount} Kcal</Text>
             </Animated.View> */}
             <View style={styles.box}>
-                <Image style={styles.picture} source={{ uri: model.randomRecipe[0].image }} />
+                {/*<Image style={styles.picture} source={{ uri: model.randomRecipe[0].image }} />*/}
+                <Image style={styles.picture} source={{ uri: `https://spoonacular.com/recipeImages/${model.randomRecipe[0].id}-636x393.jpg` }} />
                 <Text style={styles.text}>{model.randomRecipe[0].title}, {Math.round(model.randomRecipe[0].nutrition.nutrients[0].amount)} Kcal</Text>
+                <Text style={styles.messageStyle}>Loading image</Text>
             </View>
         </View>
     );
@@ -80,6 +82,15 @@ const styles = StyleSheet.create({
         color: 'white',
         textShadowColor: accentColor,
         textShadowRadius: 5
+    },
+    messageStyle: {
+        left: boxWidth * 0.3,
+        top: boxHeight * (1 / 2),
+        fontWeight: "bold",
+        fontSize: 20,
+        position: 'absolute',
+        color: "rgba(255,255,255,.5)",
+        zIndex: -1
     }
 });
 
