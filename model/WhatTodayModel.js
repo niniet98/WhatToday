@@ -2,7 +2,7 @@ import { action, computed, makeObservable, observable, observe } from "mobx";
 import React, { createContext } from "react";
 
 
-const URL_BASE = 'https://api.spoonacular.com';
+const URL_BASE = 'https://api.spoonacular.com/recipes';
 //const apiKey = "6b7427f391974de5921bcd793e67086e";
 const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
 //const apiKey = "f8b7ed4858454125a22606a37be0b9d0"; //apiKey mario 2
@@ -15,7 +15,7 @@ class WhatTodayModel {
         this.randomRecipe = null;   //recepta que es mostra en la card en cada moment
         this.favRecipes = [];      //aqui anem guardant totes les receptes Likeadas
         this.filters = [];       //array per guardar els filtres (de moment filtres de paisos per ferho mes facil, despres ja podem canviar)
-        this.recipeInfo = [];
+        this.recipeInfo = null;
 
         makeObservable(this, {
             randomRecipe: observable,
@@ -26,7 +26,8 @@ class WhatTodayModel {
             loadRandomRecipe: action,
             addFilter: action,
             removeFilter: action,
-            getRecipeInfo: action
+            setRandomRecipe: action,
+            setRecipeInfo: action,
         })
     }
 
@@ -45,31 +46,37 @@ class WhatTodayModel {
     removeFilter(filter) {
         let index = this.filters.indexOf(filter);
         this.filters.splice(index, 1);
+    }
 
+    setRandomRecipe(recipe) {
+        this.randomRecipe = recipe;
+    }
+
+    setRecipeInfo(recipeInfo) {
+        this.recipeInfo = recipeInfo;
     }
 
     async loadRandomRecipe() {
         //de moment utilitzarem l'endpoint "complexSearch" en lloc del random, ja que també permet obtenir receptes random i a més podem guardar mes informacio que en la del random
         //hem de saber si tenim o no filtres activats
         if (this.filters.length === 0) {
-            const response = await fetch(`${URL_BASE}/recipes/complexSearch?apiKey=${apiKey}&number=${numberOfRecipes}&sort=random&addRecipeNutrition=true`);
+            const response = await fetch(`${URL_BASE}/complexSearch?apiKey=${apiKey}&number=${numberOfRecipes}&sort=random&addRecipeNutrition=true`);
             const json = await response.json();
-            this.randomRecipe = json.results;
+            this.setRandomRecipe(json.results);
         } else {
-            const response = await fetch(`${URL_BASE}/recipes/complexSearch?apiKey=${apiKey}&number=${numberOfRecipes}&sort=random&addRecipeNutrition=true&cuisine=${this.filters}`);
+            const response = await fetch(`${URL_BASE}/complexSearch?apiKey=${apiKey}&number=${numberOfRecipes}&sort=random&addRecipeNutrition=true&cuisine=${this.filters}`);
             const json = await response.json();
-            this.randomRecipe = json.results;
+            this.setRandomRecipe(json.results);
         }
-
     }
+}
 
-    async getRecipeInfo({ id }) {
-        const response = await fetch(`${URL_BASE}/recipes/${id}/information?apiKey=${apiKey}&includeNutrition=true`);
-        this.recipeInfo = await response.json();
-        console.log(`${URL_BASE}/recipes/${id}/information?apiKey=${apiKey}&includeNutrition=true`);
-
-    }
-
+export const getRecipeInfo = async (id, setRecipeInfo) => {
+    const response = await fetch(`${URL_BASE}/${id}/information?apiKey=${apiKey}&includeNutrition=true`);
+    const recipeInfo = await response.json();
+    console.log(`${URL_BASE}/${id}/information?apiKey=${apiKey}&includeNutrition=true`);
+    console.log(recipeInfo);
+    setRecipeInfo(recipeInfo);
 }
 
 const model = new WhatTodayModel();

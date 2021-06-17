@@ -1,24 +1,34 @@
 import { observer } from 'mobx-react';
-import React, { useContext, useEffect, useRef } from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View, Animated, ScrollView } from 'react-native';
-import { ModelContext } from '../model/WhatTodayModel';
+import React, { useEffect, useState, useRef } from 'react';
+import { ActivityIndicator, Animated, Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import InfoDetalladaBG from '../components/icons/infoDetalladaBG';
-import InfoTag from '../components/InfoTag';
-import ReturnHeaderButton from '../components/ReturnHeaderButton';
-import Ingredients from '../components/InfoDetallada/Ingredients';
 import Directions from '../components/InfoDetallada/Directions';
 import InfoTags from '../components/InfoDetallada/InfoTags';
+import Ingredients from '../components/InfoDetallada/Ingredients';
+import InfoTag from '../components/InfoTag';
+import ReturnHeaderButton from '../components/ReturnHeaderButton';
+import { getRecipeInfo } from '../model/WhatTodayModel';
 
 const BANNER_H = 350;
 
 const InfoScreen = observer(({route, navigation: { goBack }}) => {
-    const model = useContext(ModelContext);
-    const {id} = route.params;
+    const { id } = route.params;
+    const [recipeInfo, setRecipeInfo] = useState(null);
+    const scrollA = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        model.getRecipeInfo({id});
+        getRecipeInfo(id, setRecipeInfo);
     }, []);
-    const scrollA = useRef(new Animated.Value(0)).current;
+
+    if (recipeInfo === null) {
+        return (
+            <View style={styles.emptyScreen}>
+                <ActivityIndicator size="large" color="#FC633A" />
+            </View>
+        )
+    }
+
+    
     return (
         <View>
             <TouchableOpacity style={styles.returnButton} onPress={() => goBack()}>
@@ -34,25 +44,31 @@ const InfoScreen = observer(({route, navigation: { goBack }}) => {
                 <View style={styles.bannerContainer}>
                 <Animated.Image
                     style={styles.banner(scrollA)}
-                    source={{ uri: model.recipeInfo.image }}
+                    source={{ uri: recipeInfo.image }}
                 />
                 </View>
                 <View>
                     <View style={styles.tags}>
-                        <InfoTag children={`${model.recipeInfo.readyInMinutes} min`} />
-                        <InfoTag children={`${model.recipeInfo.servings} servings`} />
+                        <InfoTag children={`${recipeInfo.readyInMinutes} min`} />
+                        <InfoTag children={`${recipeInfo.servings} servings`} />
                     </View>   
-                    <Text style={[styles.title, {marginTop:20}]}>{model.recipeInfo.title}</Text>
-                    <Text style={styles.title}>{model.recipeInfo.nutrition.nutrients[0].amount}Kcal</Text> 
-                    <Text style={styles.summary}>{model.recipeInfo.summary}</Text> 
+                    <Text style={[styles.title, {marginTop:20}]}>{recipeInfo.title}</Text>
+                    <Text style={styles.title}>{recipeInfo.nutrition.nutrients[0].amount}Kcal</Text> 
+                    <Text style={styles.summary}>{recipeInfo.summary}</Text> 
                     <ScrollView   
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         pagingEnabled={true}
                         >
-                            <View style={[styles.pages, {backgroundColor: 'transparent'}]}><Ingredients /></View>  
-                            <View style={[styles.pages, {backgroundColor: 'blue'}]}><Directions /></View> 
-                            <View style={[styles.pages, {backgroundColor: 'green'}]}><InfoTags /></View>
+                            <View style={[styles.pages, {backgroundColor: 'transparent'}]}>
+                                <Ingredients extendedIngredients={recipeInfo.extendedIngredients} />
+                            </View>  
+                            <View style={[styles.pages, {backgroundColor: 'blue'}]}>
+                                <Directions steps={recipeInfo.analyzedInstructions[0].steps} />
+                            </View> 
+                            <View style={[styles.pages, {backgroundColor: 'green'}]}>
+                                <InfoTags />
+                            </View>
                     </ScrollView>
                     <InfoDetalladaBG style={styles.svg} />
                 </View>
