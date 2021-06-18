@@ -11,7 +11,7 @@ const GetRecipes = observer(() => {
 
     return (
         <FlatList
-            data={model.favRecipes}
+            data={model.favRecipes.slice()}
             renderItem={({ item }) => <FavRecipeImage image={item.img} />}
             keyExtractor={(item, index) => `${index}`}
             numColumns={3}
