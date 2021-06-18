@@ -21,7 +21,7 @@ const SaveScreen = observer(({ navigation }) => {
     return (
         <View style={styles.screen}>
             <FlatList
-                data={model.favRecipes}
+                data={model.favRecipes.slice()}
                 renderItem={({ item, index }) => (
                     index % 3 == 1 ?
                         <TouchableOpacity onPress={() =>
