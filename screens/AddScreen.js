@@ -1,11 +1,10 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import CameraOn from '../components/CameraOn'
 
 export default function AddScreen() {
     return (
-        <View style={styles.container}>
-            <Text>Aquesta pantalla serà per afegir receptes.</Text>
-        </View>
+            <CameraOn style={styles.container}></CameraOn>
     )
 }
 
