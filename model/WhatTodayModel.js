@@ -74,8 +74,8 @@ class WhatTodayModel {
 export const getRecipeInfo = async (id, setRecipeInfo) => {
     const response = await fetch(`${URL_BASE}/${id}/information?apiKey=${apiKey}&includeNutrition=true`);
     const recipeInfo = await response.json();
-    console.log(`${URL_BASE}/${id}/information?apiKey=${apiKey}&includeNutrition=true`);
-    console.log(recipeInfo);
+    /* console.log(`${URL_BASE}/${id}/information?apiKey=${apiKey}&includeNutrition=true`);
+    console.log(recipeInfo); */
     setRecipeInfo(recipeInfo);
 }
 
