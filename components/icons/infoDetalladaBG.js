@@ -10,15 +10,15 @@ function InfoDetalladaBG(props) {
   return (
     <Svg
       width={screenWidth}
-      height={578}
-      viewBox="0 0 375 578"
+      height={2000}
+      viewBox="0 0 375 2000"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <G filter="url(#prefix__filter0_d)">
         <Path
-          d="M-68.157 331.373l52.331 247.116L402.543 595c48.926-206.778 101.994-512.243 62.904-505.94-197.76 31.895-364.419-23.765-442.646-67.268C-97.651-45.194-83.134 216.976-68.157 331.373z"
+          d="M149.5 82c96 28.8 212.333 28.667 258.5 25v1243H-33V0c20.833 15.333 86.5 53.2 182.5 82z"
           fill="url(#prefix__paint0_linear)"
         />
       </G>

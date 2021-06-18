@@ -59,16 +59,17 @@ const InfoScreen = observer(({route, navigation: { goBack }}) => {
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         pagingEnabled={true}
+                        style={{zIndex:4}}
                         >
-                            <View style={[styles.pages, {backgroundColor: 'transparent'}]}>
+                            <View style={styles.pages}>
                                 <Ingredients extendedIngredients={recipeInfo.extendedIngredients} />
-                            </View>  
-                            <View style={[styles.pages, {backgroundColor: 'blue'}]}>
+                            </View>   
+                            <View style={styles.pages}>
                                 <Directions steps={recipeInfo.analyzedInstructions[0].steps} />
                             </View> 
-                            <View style={[styles.pages, {backgroundColor: 'green'}]}>
+                            <View style={styles.pages}>
                                 <InfoTags />
-                            </View>
+                            </View> 
                     </ScrollView>
                     <InfoDetalladaBG style={styles.svg} />
                 </View>
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     },
     svg:{
         position: 'absolute',
-        top: -100,
+        top: -115,
     },
     title:{
         zIndex:1,
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
         width: screenWidth,
         alignItems: 'center',
         justifyContent: 'center',
-        height: 200
+        height: 500,
 
     },
 })

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 export default function InfoTags() {
     return (
-        <View>
+        <View style={{position: 'absolute', top: 0}}>
             <Text>ETIQUETAS</Text>
         </View>
     )
