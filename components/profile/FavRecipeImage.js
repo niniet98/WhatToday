@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react';
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image, StyleSheet, Dimensions, ActivityIndicator } from 'react-native'
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
@@ -6,15 +5,13 @@ import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimen
 
 const width = Dimensions.get('window').width;
 
-const FavRecipeImage = observer(({ image }) => {
+export default function FavRecipeImage({ image }) {
     return (
         <View>
             <Image style={styles.image} source={{ uri: image }} />
         </View>
     )
-});
-
-export default FavRecipeImage;
+}
 
 const styles = StyleSheet.create({
     image: {
