@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
+import { Feather as Icon } from '@expo/vector-icons';
+import ApertureIcon from './icons/aperture'
+import * as Permissions from 'expo-permissions';
+import * as MediaLibrary from 'expo-media-library';
 import { autorun } from 'mobx';
 
 export default function CameraOn() {
@@ -14,6 +18,15 @@ export default function CameraOn() {
     })();
   }, []);
 
+  const takePicture = async () => {
+    if (this.camera) {
+      const options = { quality: 1, base64: true };
+      const data = await this.camera.takePictureAsync(options);
+      console.log(data);
+      console.log("Holis");
+    }
+  };
+
   if (hasPermission === null) {
     return <View />;
   }
@@ -24,23 +37,24 @@ export default function CameraOn() {
     <View style={styles.container}>
       <Camera style={styles.camera} type={type}>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
+        <TouchableOpacity
             style={styles.button}
             onPress={() => {
+              takePicture();
               setType(
                 type === Camera.Constants.Type.back
                   ? Camera.Constants.Type.front
                   : Camera.Constants.Type.back
               );
             }}>
-            <Text style={styles.text}> Flip </Text>
+            <Text style={styles.text}> Icono </Text>
+            {/* <ApertureIcon/> */}
           </TouchableOpacity>
         </View>
       </Camera>
     </View>
-  ); 
+  );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -50,6 +64,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonContainer: {
+    marginBottom: 60,
+    justifyContent: "center",
     flex: 1,
     backgroundColor: 'transparent',
     flexDirection: 'row',
