@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         elevation: 7,
     },
     columnaSenar: {
-        marginTop: 50,
+        marginTop: 40,
     }
 
 })
