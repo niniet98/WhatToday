@@ -18,6 +18,10 @@ const Recipe = ({ img, counter }) => (
 const SaveScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
 
+    let categorysContent = model.categorys.map((category) => {
+        return <Category children={category} />
+    });
+
     return (
         <View style={styles.screen}>
             <FlatList
@@ -44,12 +48,7 @@ const SaveScreen = observer(({ navigation }) => {
                 start={[1, 0]}
                 end={[0, 1]}
                 style={styles.categoriesContainer}>
-                <Category children='PASTA' />
-                <Category children='MEAT' />
-                <Category children='FISH' />
-                <Category children='DESSERTS' />
-                <Category children='VEGAN' />
-                <Category children='FAT' />
+                {categorysContent}
             </LinearGradient>
         </View>
     )
