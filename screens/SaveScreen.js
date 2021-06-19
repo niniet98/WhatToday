@@ -1,12 +1,14 @@
 import { observer } from 'mobx-react';
 import React, { useContext } from 'react'
-import { View, ScrollView, Text, Button, StyleSheet, Dimensions, Image, TouchableOpacity } from 'react-native'
+import { View, ScrollView, Text, Button, StyleSheet, Dimensions, Image, TouchableOpacity, Modal } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
 import CategoriesBG from '../components/icons/categoriesBG';
 import { ModelContext } from '../model/WhatTodayModel';
 import Category from '../components/Category';
+import AddCategoryButton from '../components/AddCategoryButton';
 import { LinearGradient } from 'expo-linear-gradient'
 import { primaryColor } from '../styles/styles';
+import { useState } from 'react';
 
 const numColumns = 3;
 const Recipe = ({ img, counter }) => (
@@ -18,12 +20,20 @@ const Recipe = ({ img, counter }) => (
 const SaveScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
 
+    const [modalVisible, setModalVisible] = useState(false);
+
     let categorysContent = model.categorys.map((category) => {
         return <Category children={category} />
     });
 
     return (
         <View style={styles.screen}>
+
+            <Modal animationType="slide" transparent={true} visible={modalVisible} onRequestClose={() => { setModalVisible((modalVisible) => !modalVisible) }}>
+                <Text style={{ backgroundColor: "red" }}>Hola</Text>
+                <Button title="cierra el modal" onPress={() => setModalVisible(!modalVisible)} />
+            </Modal>
+
             <FlatList
                 data={model.favRecipes.slice()}
                 renderItem={({ item, index }) => (
@@ -41,15 +51,26 @@ const SaveScreen = observer(({ navigation }) => {
                 )}
                 numColumns={numColumns}
             />
+
             {/* <CategoriesBG style={styles.categoriesContainer} /> */}
+
             <LinearGradient
                 // Button Linear Gradient
                 colors={['#F23838', '#FCB13A']}
                 start={[1, 0]}
                 end={[0, 1]}
                 style={styles.categoriesContainer}>
+
+                <View style={styles.categoryButton} >
+                    <TouchableOpacity onPress={() => setModalVisible(true)}>
+                        <AddCategoryButton />
+                    </TouchableOpacity>
+                </View>
+
                 {categorysContent}
+
             </LinearGradient>
+
         </View>
     )
 });
@@ -109,6 +130,9 @@ const styles = StyleSheet.create({
     },
     columnaSenar: {
         marginTop: 40,
+    },
+    categoryButton: {
+        position: "absolute",
+        top: -30
     }
-
 })
