@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Cross from './icons/cross';
-import Verify from './icons/verify'
+import Add from './icons/add';
 
 
 
@@ -11,7 +10,7 @@ export default function AddCategoryButton({ type, size }) {
 
     return (
         <View style={styles.circle}>
-            <Text>Add</Text>
+            <Add />
         </View>
     )
 }
