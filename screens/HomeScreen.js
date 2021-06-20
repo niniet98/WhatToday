@@ -12,6 +12,7 @@ import { db, fire } from '../database/firebase';
 
 const HomeScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
+
     const userID = fire.auth().currentUser.uid;
     console.log('HomeScreen User', userID);
 
@@ -71,7 +72,7 @@ const HomeScreen = observer(({ navigation }) => {
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
                             saveRecipe(model.randomRecipe[0].id, model.randomRecipe[0].image);
-                            model.addFavRecipe(model.randomRecipe[0].id, model.randomRecipe[0].image);
+                            /* model.addFavRecipe(model.randomRecipe[0].id, model.randomRecipe[0].image); */
                             model.loadRandomRecipe();
                         }}>
                             <VerifyButton type={true} size={"big"} />

@@ -3,8 +3,11 @@ import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback } from 'rea
 import Title from '../components/Title'
 import { fire } from '../database/firebase';
 import LogInBackground from '../components/icons/loginBG'
+import { useContext } from 'react';
+import { ModelContext } from '../model/WhatTodayModel';
 
 export default function LogInScreen({ navigation }) {
+    const model = useContext(ModelContext);
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
@@ -14,6 +17,7 @@ export default function LogInScreen({ navigation }) {
     const handleLogIn = async () => {
         try {
             await fire.auth().signInWithEmailAndPassword(email, password);
+            /* model.setUser(); */
             /* setAuthenticated(true);
             const userID = fire.auth().currentUser.uid;
             authenticated ? setUser(userID) : null;
@@ -37,12 +41,12 @@ export default function LogInScreen({ navigation }) {
                 </TouchableWithoutFeedback>
             </View >
             <View style={styles.SignUpContainer}>
-                    <Text>Don't you have an account yet?</Text>
-                    <TouchableWithoutFeedback onPress={() => navigation.navigate('SignUp')}>
-                        <Text style={styles.register}>Register</Text>
-                    </TouchableWithoutFeedback>
-                </View>
-                <LogInBackground style={styles.background} />
+                <Text>Don't you have an account yet?</Text>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('SignUp')}>
+                    <Text style={styles.register}>Register</Text>
+                </TouchableWithoutFeedback>
+            </View>
+            <LogInBackground style={styles.background} />
         </View>
     )
 }
@@ -61,7 +65,7 @@ const styles = StyleSheet.create({
         borderColor: '#fff',
         paddingHorizontal: 10,
         marginBottom: 50,
-        
+
     },
     confirmBtn: {
         backgroundColor: '#FCB13A',
@@ -83,16 +87,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginVertical: 70,
         position: 'absolute',
-        bottom:'-60%',
+        bottom: '-60%',
         left: 20
     },
     register: {
         marginHorizontal: 5,
         color: '#FC633A',
     },
-    background:{
-        position:'absolute',
+    background: {
+        position: 'absolute',
         top: 0,
-        zIndex:-1,
+        zIndex: -1,
     }
 })

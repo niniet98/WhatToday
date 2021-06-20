@@ -6,9 +6,29 @@ import FavRecipeImage from '../components/profile/FavRecipeImage';
 import Profile from '../components/profile/Profile'
 import ProfileTabs from '../components/profile/ProfileTabs'
 import { ModelContext } from '../model/WhatTodayModel'
+import { db, fire } from '../database/firebase';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const ProfileScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
+
+    const userID = fire.auth().currentUser.uid;
+    const [recipes, setRecipes] = useState([]);
+
+    const getData = async () => {
+        await db.collection('users/' + userID + '/FavRecipes').onSnapshot((querySnapshot) => {
+            const docs = [];
+            querySnapshot.forEach((doc) => {
+                docs.push({ ...doc.data() });
+            });
+            setRecipes(docs);
+        })
+    }
+
+    useEffect(() => {
+        getData();
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -17,15 +37,15 @@ const ProfileScreen = observer(({ navigation }) => {
             <ProfileTabs />
             <View style={{ height: 29 }}></View>
             <FlatList
-                data={model.favRecipes.slice()}
+                data={recipes.slice()}
                 renderItem={({ item }) => (
                     <TouchableOpacity onPress={() => navigation.navigate("Info", { id: item.id })}>
-                        <FavRecipeImage image={item.img} />
+                        <FavRecipeImage image={item.url} />
                     </TouchableOpacity>
                 )}
                 keyExtractor={(item, index) => `${index}`}
                 numColumns={3}
-                /* style={{marginTop:-40}} */
+            /* style={{marginTop:-40}} */
             />
         </View>
     )

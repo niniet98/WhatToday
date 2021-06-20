@@ -1,19 +1,19 @@
 import { action, computed, makeObservable, observable, observe } from "mobx";
 import React, { createContext } from "react";
+import { fire } from "../database/firebase";
 
 
 const URL_BASE = 'https://api.spoonacular.com/recipes';
 //const apiKey = "6b7427f391974de5921bcd793e67086e"; //noe 1
-//const apiKey = "701b25c5a2014c749a3d17ca5e3b357f"; //noe 2
+const apiKey = "701b25c5a2014c749a3d17ca5e3b357f"; //noe 2
 //15b916dae08f81c59aaff57a425be1c638ad7cbb
 //const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
 //const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
 //e89966377c73ed879fdda9b8ac57ce1a324259db
 //const apiKey = "f8b7ed4858454125a22606a37be0b9d0"; //apiKey mario 2
 //const apiKey = "40c1982b35bb441a8f82db372ebe7d9c"; //apiKey mario 3
-const apiKey = "cdf982d07e1946d585219202dc10cb26"; //apikey jose
+//const apiKey = "cdf982d07e1946d585219202dc10cb26"; //apikey jose
 const numberOfRecipes = 1;  //anirem d'una en una
-
 
 
 class WhatTodayModel {
@@ -23,6 +23,7 @@ class WhatTodayModel {
         this.filters = [];       //array per guardar els filtres (de moment filtres de paisos per ferho mes facil, despres ja podem canviar)
         this.recipeInfo = null;
         this.categorys = [];  //array per anar guardant les categories que vagi creant l'usuari
+        /* this.userID = null; */
 
         makeObservable(this, {
             randomRecipe: observable,
@@ -30,18 +31,44 @@ class WhatTodayModel {
             filters: observable,
             recipeInfo: observable,
             categorys: observable,
+            /* userID: observable, */
             removeCategory: observable,
             addFavRecipe: action,
+            /* getFavRecipes: action, */
             loadRandomRecipe: action,
             addFilter: action,
             addCategory: action,
             removeFilter: action,
             setRandomRecipe: action,
             setRecipeInfo: action,
+            /* setUser: action, */
         })
     }
 
+    /* setUser() {
+        this.userID = fire.auth().currentUser.uid;
+    } */
+
     addFavRecipe(idParam, imageParam) {
+        /* const recipesRef = db.collection(`users/${this.userID}/FavRecipes`);
+        const snapshot = await recipesRef.get();
+
+        if (!snapshot.exists) {
+            try {
+                userRef.add({
+                    id: idParam,
+                    url: imageParam,
+                })
+                db.collection('users/' + this.userID + '/FavRecipes').onSnapshot((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        this.favRecipes.push(...doc.data());
+                    });
+                })
+            } catch (error) {
+                console.log('ERROR', error);
+            }
+        } */
+
         this.favRecipes.push({
             id: idParam,
             img: imageParam

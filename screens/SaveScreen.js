@@ -9,6 +9,8 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { parapraphTextSize, parapraphTextSize2, primaryColor } from '../styles/styles';
 import { useState } from 'react';
 import { TextInput } from 'react-native';
+import { db, fire } from '../database/firebase';
+import { useEffect } from 'react';
 
 
 const numColumns = 3;
@@ -21,19 +23,82 @@ const Recipe = ({ img, counter }) => (
 
 const SaveScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
+    console.log(model.favRecipes);
+
+    const userID = fire.auth().currentUser.uid;
+    const [user, setUser] = useState('');
+    const [recipes, setRecipes] = useState([]);
+
+    const getData = async () => {
+        var userRef = db.collection("users").doc(`${userID}`);
+        userRef.get().then((doc) => {
+            if (doc.exists) {
+                setUser(doc.data());
+            } else {
+                console.log("No such document!");
+            }
+        }).catch((err) => {
+            console.log("Error gettintg document:", err);
+        })
+        await db.collection('users/' + userID + '/FavRecipes').onSnapshot((querySnapshot) => {
+            const docs = [];
+            querySnapshot.forEach((doc) => {
+                docs.push({ ...doc.data() });
+            });
+            setRecipes(docs);
+        })
+    }
+
+    console.log(recipes);
+
+    useEffect(() => {
+        getData();
+        getCategories();
+    }, []);
 
     //------------------------------------//
 
     const [modalVisible, setModalVisible] = useState(false);
     const [categoryText, setCategoryText] = useState("");
+    const [categories, setCategories] = useState([]);
+
+    const addCategory = async () => {
+        if (categoryText !== null) {
+            const userRef = db.collection(`users/${userID}/Categories`);
+            const snapshot = await userRef.get();
+
+            if (!snapshot.exists) {
+                try {
+                    userRef.add({
+                        category: categoryText,
+                    })
+                } catch (error) {
+                    console.log('Error (categoria)', error);
+                }
+            }
+
+        } else {
+            alert('No ha introducido ninguna categoría.');
+        }
+    }
+
+    const getCategories = () => {
+        db.collection('users/' + userID + '/Categories').onSnapshot((querySnapshot) => {
+            const docs = [];
+            querySnapshot.forEach((doc) => {
+                docs.push({ ...doc.data(), id: doc.id });
+            })
+            setCategories(docs);
+        })
+    }
 
     //------------------------------------//
 
-    let categorysContent = model.categorys.length === 0 ?
+    let categorysContent = categories.length === 0 ?
         <Text style={styles.message}>Click on the button to add a new category!</Text>
         :
         <ScrollView style={styles.categoriesScroll} horizontal decelerationRate="fast" showsHorizontalScrollIndicator >
-            {model.categorys.map((category, idx) => { return <Category key={idx}>{category}</Category> })}
+            {categories.map((category, idx) => { return <Category key={idx}>{category.category}</Category> })}
         </ScrollView>
         ;
 
@@ -55,7 +120,8 @@ const SaveScreen = observer(({ navigation }) => {
                     />
                     <TouchableOpacity onPress={() => {
                         setModalVisible(!modalVisible);
-                        model.addCategory(categoryText);
+                        addCategory();
+                        /* model.addCategory(categoryText); */
                         setCategoryText("");
                     }}>
                         <View style={styles.buttonModal}>
@@ -66,18 +132,18 @@ const SaveScreen = observer(({ navigation }) => {
             </Modal>
 
             <FlatList
-                data={model.favRecipes.slice()}
+                data={recipes.slice()}
                 renderItem={({ item, index }) => (
                     index % 3 == 1 ?
                         <TouchableOpacity onPress={() =>
                             navigation.navigate("Info", { id: item.id })
                         }>
-                            <Recipe key={item.id} img={item.img} counter={index} />
+                            <Recipe key={item.id} img={item.url} counter={index} />
                         </TouchableOpacity> :
                         <TouchableOpacity style={styles.columnaSenar} onPress={() =>
                             navigation.navigate("Info", { id: item.id })
                         }>
-                            <Recipe key={item.id} img={item.img} counter={index} />
+                            <Recipe key={item.id} img={item.url} counter={index} />
                         </TouchableOpacity>
                 )}
                 numColumns={numColumns}
