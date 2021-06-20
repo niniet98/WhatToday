@@ -9,10 +9,11 @@ const apiKey = "701b25c5a2014c749a3d17ca5e3b357f"; //noe 2
 //15b916dae08f81c59aaff57a425be1c638ad7cbb
 //const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
 //const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
-//e89966377c73ed879fdda9b8ac57ce1a324259db
+//const apiKey = "e89966377c73ed879fdda9b8ac57ce1a324259db";
 //const apiKey = "f8b7ed4858454125a22606a37be0b9d0"; //apiKey mario 2
 //const apiKey = "40c1982b35bb441a8f82db372ebe7d9c"; //apiKey mario 3
 //const apiKey = "cdf982d07e1946d585219202dc10cb26"; //apikey jose
+//const apiKey = "409f72c07c6e417fb089c932c749b2ff";   //apikey jose 2
 const numberOfRecipes = 1;  //anirem d'una en una
 
 
@@ -22,8 +23,9 @@ class WhatTodayModel {
         this.favRecipes = [];      //aqui anem guardant totes les receptes Likeadas
         this.filters = [];       //array per guardar els filtres (de moment filtres de paisos per ferho mes facil, despres ja podem canviar)
         this.recipeInfo = null;
-        this.categorys = [];  //array per anar guardant les categories que vagi creant l'usuari
-        /* this.userID = null; */
+        this.categorys = ["pasta", "meat", "xd"];  //array per anar guardant les categories que vagi creant l'usuari
+        this.activeCategory = null;
+        this.recipesWithCategorys = [];
 
         makeObservable(this, {
             randomRecipe: observable,
@@ -31,8 +33,9 @@ class WhatTodayModel {
             filters: observable,
             recipeInfo: observable,
             categorys: observable,
-            /* userID: observable, */
-            removeCategory: observable,
+            recipesWithCategorys: observable,
+            activeCategory: observable,
+            removeCategory: action,
             addFavRecipe: action,
             /* getFavRecipes: action, */
             loadRandomRecipe: action,
@@ -41,7 +44,9 @@ class WhatTodayModel {
             removeFilter: action,
             setRandomRecipe: action,
             setRecipeInfo: action,
-            /* setUser: action, */
+            removeFavRecipe: action,
+            setCategory: action,
+            setActiveCategory: action,
         })
     }
 
@@ -71,7 +76,7 @@ class WhatTodayModel {
 
         this.favRecipes.push({
             id: idParam,
-            img: imageParam
+            img: imageParam,
         });
     }
 
@@ -93,12 +98,41 @@ class WhatTodayModel {
         this.categorys.splice(index, 1);
     }
 
+    removeFavRecipe(recipe) {
+        let index = this.favRecipes.indexOf(recipe);
+        this.favRecipes.splice(index, 1);
+    }
+
     setRandomRecipe(recipe) {
         this.randomRecipe = recipe;
     }
 
     setRecipeInfo(recipeInfo) {
         this.recipeInfo = recipeInfo;
+    }
+
+    setCategory(recipeParam, categoryParam, imageParam) {
+        let flag = false;
+
+        this.recipesWithCategorys.forEach((object) => {
+            if (object.recipe === recipeParam) {
+                object.category = categoryParam;
+                flag = true;
+            }
+        });
+
+        if (!flag) {
+            this.recipesWithCategorys.push({
+                recipe: recipeParam,
+                category: categoryParam,
+                image: imageParam
+            });
+        }
+    }
+
+    setActiveCategory(category) {
+        this.activeCategory = category;
+        console.log(this.activeCategory);
     }
 
     async loadRandomRecipe() {
