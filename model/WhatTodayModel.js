@@ -3,11 +3,17 @@ import React, { createContext } from "react";
 
 
 const URL_BASE = 'https://api.spoonacular.com/recipes';
-//const apiKey = "6b7427f391974de5921bcd793e67086e";
-const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
+//const apiKey = "6b7427f391974de5921bcd793e67086e"; //noe 1
+//const apiKey = "701b25c5a2014c749a3d17ca5e3b357f"; //noe 2
+//15b916dae08f81c59aaff57a425be1c638ad7cbb
+//const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
+//const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
+//e89966377c73ed879fdda9b8ac57ce1a324259db
 //const apiKey = "f8b7ed4858454125a22606a37be0b9d0"; //apiKey mario 2
 //const apiKey = "40c1982b35bb441a8f82db372ebe7d9c"; //apiKey mario 3
+const apiKey = "cdf982d07e1946d585219202dc10cb26"; //apikey jose
 const numberOfRecipes = 1;  //anirem d'una en una
+
 
 
 class WhatTodayModel {
@@ -24,6 +30,7 @@ class WhatTodayModel {
             filters: observable,
             recipeInfo: observable,
             categorys: observable,
+            removeCategory: observable,
             addFavRecipe: action,
             loadRandomRecipe: action,
             addFilter: action,
@@ -52,6 +59,11 @@ class WhatTodayModel {
     removeFilter(filter) {
         let index = this.filters.indexOf(filter);
         this.filters.splice(index, 1);
+    }
+
+    removeCategory(category) {
+        let index = this.categorys.indexOf(category);
+        this.categorys.splice(index, 1);
     }
 
     setRandomRecipe(recipe) {

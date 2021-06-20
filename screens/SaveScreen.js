@@ -33,7 +33,7 @@ const SaveScreen = observer(({ navigation }) => {
         <Text style={styles.message}>Click on the button to add a new category!</Text>
         :
         <ScrollView style={styles.categoriesScroll} horizontal decelerationRate="fast" showsHorizontalScrollIndicator >
-            {model.categorys.map((category, idx) => { return <Category children={category} key={idx} /> })}
+            {model.categorys.map((category, idx) => { return <Category key={idx}>{category}</Category> })}
         </ScrollView>
         ;
 

@@ -162,11 +162,12 @@ const styles = StyleSheet.create({
         backgroundColor: "white"
     },
     separator: {
-        width: 250,
-        height: 2,
+        width: 175,
+        height: 1,
         backgroundColor: 'white',
         alignSelf: 'center',
         zIndex: 3,
-        marginBottom: 20
+        marginBottom: 25,
+        marginTop: 20
     }
 })
