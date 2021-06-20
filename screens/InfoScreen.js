@@ -7,7 +7,10 @@ import InfoTags from '../components/InfoDetallada/InfoTags';
 import Ingredients from '../components/InfoDetallada/Ingredients';
 import InfoTag from '../components/InfoTag';
 import ReturnHeaderButton from '../components/ReturnHeaderButton';
-import { getRecipeInfo } from '../model/WhatTodayModel';
+import { getRecipeInfo, ModelContext } from '../model/WhatTodayModel';
+import ModalSelector from 'react-native-modal-selector';
+import { useContext } from 'react';
+
 
 const BANNER_H = 350;
 
@@ -15,6 +18,22 @@ const InfoScreen = observer(({ route, navigation: { goBack } }) => {
     const { id } = route.params;
     const [recipeInfo, setRecipeInfo] = useState(null);
     const scrollA = useRef(new Animated.Value(0)).current;
+
+    //----------------------//
+
+    const model = useContext(ModelContext);
+
+    //----------------------//
+
+    const data = [];
+    for (let i = 0; i < model.categorys.length; i++) {
+        data.push({
+            key: i,
+            label: model.categorys[i]
+        });
+    }
+
+    //----------------------//
 
     useEffect(() => {
         getRecipeInfo(id, setRecipeInfo);
@@ -54,6 +73,11 @@ const InfoScreen = observer(({ route, navigation: { goBack } }) => {
                     </View>
                     <Text style={[styles.title, { marginTop: 20 }]}>{recipeInfo.title}</Text>
                     <Text style={styles.title}>{recipeInfo.nutrition.nutrients[0].amount}Kcal</Text>
+
+                    <View style={styles.modalSelector}>
+                        <ModalSelector data={data} initValue="Select a category for this recipe" onChange={(option) => { model.setCategory(id, option.label, recipeInfo.image) }} />
+                    </View>
+
                     <Text style={styles.summary}>{recipeInfo.summary}</Text>
                     <View style={styles.separator}></View>
                     <ScrollView
@@ -169,5 +193,9 @@ const styles = StyleSheet.create({
         zIndex: 3,
         marginBottom: 25,
         marginTop: 20
+    },
+    modalSelector: {
+        zIndex: 1,
+        color: 'white',
     }
 })

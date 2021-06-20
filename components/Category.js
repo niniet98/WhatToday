@@ -20,7 +20,12 @@ export default function Category({ children }) {
                     <RemoveButton />
                 </TouchableOpacity>
             </View>
-            <TouchableWithoutFeedback onPress={() => setPressed(prevState => !prevState)}>
+            <TouchableWithoutFeedback onPress={() => {
+                setPressed(prevState => !prevState);
+                if (!pressed) {
+                    model.setActiveCategory(children);
+                }
+            }}>
                 <View style={[styles.button, extraStyle]}>
                     <Text style={styles.text}>{children}</Text>
                 </View>

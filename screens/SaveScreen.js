@@ -24,6 +24,37 @@ const Recipe = ({ img, counter }) => (
         </View>
 );
 
+const FilteredRecipes = ({ data }) => (
+    <FlatList
+        data={data}
+        renderItem={({ item, index }) => (
+            index % 3 == 1 ?
+                <View>
+                    <View style={{ position: "absolute", zIndex: 1, top: 0, right: 5 }}>
+                        <TouchableOpacity onPress={() => model.removeFavRecipe(item.image)}>
+                            <RemoveButton />
+                        </TouchableOpacity>
+                    </View>
+                    <TouchableOpacity onPress={() => navigation.navigate("Info", { id: item.recipe })}>
+                        <Recipe key={item.recipe} img={item.image} counter={index} />
+                    </TouchableOpacity>
+                </View>
+                :
+                <View>
+                    <View style={{ position: "absolute", zIndex: 1, top: 40, right: 10 }}>
+                        <TouchableOpacity onPress={() => model.removeFavRecipe(item.image)}>
+                            <RemoveButton />
+                        </TouchableOpacity>
+                    </View>
+                    <TouchableOpacity style={styles.columnaSenar} onPress={() => navigation.navigate("Info", { id: item.recipe })}>
+                        <Recipe key={item.recipe} img={item.image} counter={index} />
+                    </TouchableOpacity>
+                </View>
+        )}
+        numColumns={numColumns}
+    />
+);
+
 
 const SaveScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
@@ -45,6 +76,49 @@ const SaveScreen = observer(({ navigation }) => {
 
     let extraStyle = categoryText === "" ? styles.buttonModalDisabled : styles.buttonModalActive;
     let onOff = categoryText === "" ? true : false;
+
+    //------------------------------------//
+
+    let filteredArray = [];
+
+    let recipesContent = model.activeCategory === null ?
+        <FlatList
+            data={model.favRecipes.slice()}
+            renderItem={({ item, index }) => (
+                index % 3 == 1 ?
+                    <View>
+                        <View style={{ position: "absolute", zIndex: 1, top: 0, right: 5 }}>
+                            <TouchableOpacity onPress={() => model.removeFavRecipe(item.img)}>
+                                <RemoveButton />
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity onPress={() => navigation.navigate("Info", { id: item.id })}>
+                            <Recipe key={item.id} img={item.img} counter={index} />
+                        </TouchableOpacity>
+                    </View>
+                    :
+                    <View>
+                        <View style={{ position: "absolute", zIndex: 1, top: 40, right: 10 }}>
+                            <TouchableOpacity onPress={() => model.removeFavRecipe(item.img)}>
+                                <RemoveButton />
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity style={styles.columnaSenar} onPress={() => navigation.navigate("Info", { id: item.id })}>
+                            <Recipe key={item.id} img={item.img} counter={index} />
+                        </TouchableOpacity>
+                    </View>
+            )}
+            numColumns={numColumns}
+        />
+        :
+        model.recipesWithCategorys.forEach((object) => {
+            if (object.category === model.activeCategory) {
+                filteredArray.push(object);
+            }
+        });
+    <FilteredRecipes data={filteredArray} />
+        ;
+
 
     //------------------------------------//
 
@@ -74,34 +148,7 @@ const SaveScreen = observer(({ navigation }) => {
                 </View>
             </Modal>
 
-            <FlatList
-                data={model.favRecipes.slice()}
-                renderItem={({ item, index }) => (
-                    index % 3 == 1 ?
-                        <View>
-                            <View style={{ position: "absolute", zIndex: 1, top: 0, right: 5 }}>
-                                <TouchableOpacity onPress={() => model.removeFavRecipe(item.img)}>
-                                    <RemoveButton />
-                                </TouchableOpacity>
-                            </View>
-                            <TouchableOpacity onPress={() => navigation.navigate("Info", { id: item.id })}>
-                                <Recipe key={item.id} img={item.img} counter={index} />
-                            </TouchableOpacity>
-                        </View>
-                        :
-                        <View>
-                            <View style={{ position: "absolute", zIndex: 1, top: 40, right: 10 }}>
-                                <TouchableOpacity onPress={() => model.removeFavRecipe(item.img)}>
-                                    <RemoveButton />
-                                </TouchableOpacity>
-                            </View>
-                            <TouchableOpacity style={styles.columnaSenar} onPress={() => navigation.navigate("Info", { id: item.id })}>
-                                <Recipe key={item.id} img={item.img} counter={index} />
-                            </TouchableOpacity>
-                        </View>
-                )}
-                numColumns={numColumns}
-            />
+            {recipesContent}
 
             <LinearGradient
                 // Button Linear Gradient
