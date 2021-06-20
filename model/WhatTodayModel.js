@@ -5,8 +5,9 @@ import React, { createContext } from "react";
 const URL_BASE = 'https://api.spoonacular.com/recipes';
 //const apiKey = "6b7427f391974de5921bcd793e67086e";
 //const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
-const apiKey = "f8b7ed4858454125a22606a37be0b9d0"; //apiKey mario 2
+//const apiKey = "f8b7ed4858454125a22606a37be0b9d0"; //apiKey mario 2
 //const apiKey = "40c1982b35bb441a8f82db372ebe7d9c"; //apiKey mario 3
+const apiKey = "cdf982d07e1946d585219202dc10cb26"; //apikey jose
 const numberOfRecipes = 1;  //anirem d'una en una
 
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 import { accentColor } from '../styles/styles';
+import RemoveCategoryButton from "./RemoveCategoryButton";
 import Demo from './Demo'
 
 export default function Category({ children }) {
@@ -10,13 +11,18 @@ export default function Category({ children }) {
     const extraStyle = pressed ? styles.buttonPressed : styles.buttonNotPressed;
 
     return (
-
-        <TouchableWithoutFeedback onPress={() => setPressed(prevState => !prevState)}>
-            <View style={[styles.button, extraStyle]}>
-                <Text style={styles.text}>{children}</Text>
+        <View>
+            <View style={{ position: "absolute", zIndex: 1, top: 0, right: 0 }}>
+                <TouchableOpacity onPress={() => console.log("xd")}>
+                    <RemoveCategoryButton />
+                </TouchableOpacity>
             </View>
-        </TouchableWithoutFeedback>
-
+            <TouchableWithoutFeedback onPress={() => setPressed(prevState => !prevState)}>
+                <View style={[styles.button, extraStyle]}>
+                    <Text style={styles.text}>{children}</Text>
+                </View>
+            </TouchableWithoutFeedback>
+        </View >
     )
 }
 
@@ -31,6 +37,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         margin: 7,
         elevation: 5,
+        zIndex: -1
     },
     text: {
         color: accentColor,
