@@ -8,10 +8,11 @@ const URL_BASE = 'https://api.spoonacular.com/recipes';
 //15b916dae08f81c59aaff57a425be1c638ad7cbb
 //const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
 //const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
-//e89966377c73ed879fdda9b8ac57ce1a324259db
+//const apiKey = "e89966377c73ed879fdda9b8ac57ce1a324259db";
 //const apiKey = "f8b7ed4858454125a22606a37be0b9d0"; //apiKey mario 2
 //const apiKey = "40c1982b35bb441a8f82db372ebe7d9c"; //apiKey mario 3
-const apiKey = "cdf982d07e1946d585219202dc10cb26"; //apikey jose
+//const apiKey = "cdf982d07e1946d585219202dc10cb26"; //apikey jose
+const apiKey = "409f72c07c6e417fb089c932c749b2ff";   //apikey jose 2
 const numberOfRecipes = 1;  //anirem d'una en una
 
 
@@ -30,7 +31,7 @@ class WhatTodayModel {
             filters: observable,
             recipeInfo: observable,
             categorys: observable,
-            removeCategory: observable,
+            removeCategory: action,
             addFavRecipe: action,
             loadRandomRecipe: action,
             addFilter: action,
@@ -38,6 +39,7 @@ class WhatTodayModel {
             removeFilter: action,
             setRandomRecipe: action,
             setRecipeInfo: action,
+            removeFavRecipe: action
         })
     }
 
@@ -64,6 +66,11 @@ class WhatTodayModel {
     removeCategory(category) {
         let index = this.categorys.indexOf(category);
         this.categorys.splice(index, 1);
+    }
+
+    removeFavRecipe(recipe) {
+        let index = this.favRecipes.indexOf(recipe);
+        this.favRecipes.splice(index, 1);
     }
 
     setRandomRecipe(recipe) {

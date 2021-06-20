@@ -9,13 +9,19 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { parapraphTextSize, parapraphTextSize2, primaryColor } from '../styles/styles';
 import { useState } from 'react';
 import { TextInput } from 'react-native';
-
+import RemoveButton from '../components/RemoveButton';
 
 const numColumns = 3;
+
 const Recipe = ({ img, counter }) => (
     counter % 2 == 0 ?
-        <View style={[styles.recipe, styles.rotationRight]}><Image style={styles.picture} source={{ uri: img }} /></View> :
-        <View style={[styles.recipe, styles.rotationLeft]}><Image style={styles.picture} source={{ uri: img }} /></View>
+        <View style={[styles.recipe, styles.rotationRight]}>
+            <Image style={styles.picture} source={{ uri: img }} />
+        </View>
+        :
+        <View style={[styles.recipe, styles.rotationLeft]}>
+            <Image style={styles.picture} source={{ uri: img }} />
+        </View>
 );
 
 
@@ -37,6 +43,9 @@ const SaveScreen = observer(({ navigation }) => {
         </ScrollView>
         ;
 
+    let extraStyle = categoryText === "" ? styles.buttonModalDisabled : styles.buttonModalActive;
+    let onOff = categoryText === "" ? true : false;
+
     //------------------------------------//
 
     return (
@@ -53,12 +62,12 @@ const SaveScreen = observer(({ navigation }) => {
                         value={categoryText}
                         onChangeText={(newText) => setCategoryText(newText)}
                     />
-                    <TouchableOpacity onPress={() => {
+                    <TouchableOpacity disabled={onOff} onPress={() => {
                         setModalVisible(!modalVisible);
                         model.addCategory(categoryText);
                         setCategoryText("");
                     }}>
-                        <View style={styles.buttonModal}>
+                        <View style={[styles.buttonModal, extraStyle]}>
                             <Text style={styles.buttonTextModal}>Create</Text>
                         </View>
                     </TouchableOpacity>
@@ -69,16 +78,27 @@ const SaveScreen = observer(({ navigation }) => {
                 data={model.favRecipes.slice()}
                 renderItem={({ item, index }) => (
                     index % 3 == 1 ?
-                        <TouchableOpacity onPress={() =>
-                            navigation.navigate("Info", { id: item.id })
-                        }>
-                            <Recipe key={item.id} img={item.img} counter={index} />
-                        </TouchableOpacity> :
-                        <TouchableOpacity style={styles.columnaSenar} onPress={() =>
-                            navigation.navigate("Info", { id: item.id })
-                        }>
-                            <Recipe key={item.id} img={item.img} counter={index} />
-                        </TouchableOpacity>
+                        <View>
+                            <View style={{ position: "absolute", zIndex: 1, top: 0, right: 5 }}>
+                                <TouchableOpacity onPress={() => model.removeFavRecipe(item.img)}>
+                                    <RemoveButton />
+                                </TouchableOpacity>
+                            </View>
+                            <TouchableOpacity onPress={() => navigation.navigate("Info", { id: item.id })}>
+                                <Recipe key={item.id} img={item.img} counter={index} />
+                            </TouchableOpacity>
+                        </View>
+                        :
+                        <View>
+                            <View style={{ position: "absolute", zIndex: 1, top: 40, right: 10 }}>
+                                <TouchableOpacity onPress={() => model.removeFavRecipe(item.img)}>
+                                    <RemoveButton />
+                                </TouchableOpacity>
+                            </View>
+                            <TouchableOpacity style={styles.columnaSenar} onPress={() => navigation.navigate("Info", { id: item.id })}>
+                                <Recipe key={item.id} img={item.img} counter={index} />
+                            </TouchableOpacity>
+                        </View>
                 )}
                 numColumns={numColumns}
             />
@@ -202,6 +222,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         justifyContent: 'center',
         backgroundColor: primaryColor
+    },
+    buttonModalActive: {
+        opacity: 1
+    },
+    buttonModalDisabled: {
+        opacity: .5
     },
     buttonTextModal: {
         textAlign: 'center',
