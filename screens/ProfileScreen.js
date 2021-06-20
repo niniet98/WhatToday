@@ -25,6 +25,7 @@ const ProfileScreen = observer(({ navigation }) => {
                 )}
                 keyExtractor={(item, index) => `${index}`}
                 numColumns={3}
+                /* style={{marginTop:-40}} */
             />
         </View>
     )

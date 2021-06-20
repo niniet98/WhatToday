@@ -11,20 +11,12 @@ const MediumChefButton = (props) => (
 
 export default function ProfileTabs() {
 
-    const [gridPressed, gridSetPressed] = useState(false);
-    const gridSelectedStyle = gridPressed ? styles.isSelected : styles.isNotSelected;
-
-    const [chefPressed, chefSetPressed] = useState(true);
+    const [chefPressed, chefSetPressed] = useState(false);
     const chefSelectedStyle = chefPressed ? styles.isSelected : styles.isNotSelected;
 
     return (
         <View style={styles.container}>
-            <TouchableWithoutFeedback onPress={() => { gridSetPressed(true); chefSetPressed(false) }}>
-                <View style={[styles.button, gridSelectedStyle]}>
-                    <Grid />
-                </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => { gridSetPressed(false); chefSetPressed(true) }}>
+            <TouchableWithoutFeedback>
                 <View style={[styles.button, chefSelectedStyle]}>
                     <MediumChef />
                 </View>
