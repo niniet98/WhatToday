@@ -26,6 +26,17 @@ const Recipe = ({ img, counter }) => (
         </View>
 );
 
+const userID = fire.auth().currentUser.uid;
+
+const deleteRecipe = (rId) => {
+    db.collection('users/' + userID + '/FavRecipes/').doc(rId).delete().then(() => {
+        console.log(rId);
+        console.log("Document successfully deleted!");
+    }).catch((error) => {
+        console.error("Error removing document: ", error);
+    })
+}
+
 const FilteredRecipes = ({ recipes }) => {
     const model = useContext(ModelContext);
     let filteredArray = [];
@@ -48,7 +59,7 @@ const FilteredRecipes = ({ recipes }) => {
                 index % 3 == 1 ?
                     <View>
                         <View style={{ position: "absolute", zIndex: 1, top: 0, right: 5 }}>
-                            <TouchableOpacity onPress={() => model.removeFavRecipe(item.image)}>
+                            <TouchableOpacity onPress={() => deleteRecipe(item.rId)/* model.removeFavRecipe(item.image) */}>
                                 <RemoveButton />
                             </TouchableOpacity>
                         </View>
@@ -59,7 +70,7 @@ const FilteredRecipes = ({ recipes }) => {
                     :
                     <View>
                         <View style={{ position: "absolute", zIndex: 1, top: 40, right: 10 }}>
-                            <TouchableOpacity onPress={() => model.removeFavRecipe(item.image)}>
+                            <TouchableOpacity onPress={() => deleteRecipe(item.rId)/* model.removeFavRecipe(item.image) */}>
                                 <RemoveButton />
                             </TouchableOpacity>
                         </View>
@@ -78,7 +89,6 @@ const SaveScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
     console.log(model.favRecipes);
 
-    const userID = fire.auth().currentUser.uid;
     const [user, setUser] = useState('');
     const [recipes, setRecipes] = useState([]);
 
@@ -151,7 +161,7 @@ const SaveScreen = observer(({ navigation }) => {
         <Text style={styles.message}>Click on the button to add a new category!</Text>
         :
         <ScrollView style={styles.categoriesScroll} horizontal decelerationRate="fast" showsHorizontalScrollIndicator >
-            {categories.map((category, idx) => { return <Category key={idx}>{category.category}</Category> })}
+            {categories.map((category, idx) => { return <Category key={idx} category={category}>{category.category}</Category> })}
         </ScrollView>
         ;
 
@@ -169,7 +179,7 @@ const SaveScreen = observer(({ navigation }) => {
                 index % 3 == 1 ?
                     <View>
                         <View style={{ position: "absolute", zIndex: 1, top: 0, right: 5 }}>
-                            <TouchableOpacity onPress={() => model.removeFavRecipe(item.img)}>
+                            <TouchableOpacity onPress={() => deleteRecipe(item.rId)/* model.removeFavRecipe(item.img) */}>
                                 <RemoveButton />
                             </TouchableOpacity>
                         </View>
@@ -180,7 +190,7 @@ const SaveScreen = observer(({ navigation }) => {
                     :
                     <View>
                         <View style={{ position: "absolute", zIndex: 1, top: 40, right: 10 }}>
-                            <TouchableOpacity onPress={() => model.removeFavRecipe(item.img)}>
+                            <TouchableOpacity onPress={() => deleteRecipe(item.rId)/* model.removeFavRecipe(item.img) */}>
                                 <RemoveButton />
                             </TouchableOpacity>
                         </View>

@@ -5,9 +5,31 @@ import RemoveButton from "./RemoveButton";
 import Demo from './Demo'
 import { useContext } from 'react';
 import { ModelContext } from '../model/WhatTodayModel';
+import { db, fire } from '../database/firebase';
 
-export default function Category({ children }) {
+export default function Category({ children, category }) {
     const model = useContext(ModelContext);
+
+
+    const userID = fire.auth().currentUser.uid;
+
+    /* const getCategories = () => {
+        db.collection('users/' + userID + '/Categories').onSnapshot((querySnapshot) => {
+            const docs = [];
+            querySnapshot.forEach((doc) => {
+                docs.push()
+            })
+        })
+    } */
+
+    const deleteCategory = (catID) => {
+        db.collection('users/' + userID + '/Categories/').doc(catID).delete().then(() => {
+            console.log(catID);
+            console.log("Document successfully deleted!");
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    }
 
     const [pressed, setPressed] = useState(false);
 
@@ -16,7 +38,7 @@ export default function Category({ children }) {
     return (
         <View>
             <View style={{ position: "absolute", zIndex: 1, top: 0, right: 0 }}>
-                <TouchableOpacity onPress={() => model.removeCategory(children)}>
+                <TouchableOpacity onPress={() => deleteCategory(category.id)/* model.removeCategory(children)*/}>
                     <RemoveButton />
                 </TouchableOpacity>
             </View>
@@ -24,7 +46,7 @@ export default function Category({ children }) {
                 setPressed(prevState => !prevState);
                 if (!pressed) {
                     model.setActiveCategory(children);
-                } else{model.setActiveCategory(null)}
+                } else { model.setActiveCategory(null) }
             }}>
                 <View style={[styles.button, extraStyle]}>
                     <Text style={styles.text}>{children}</Text>
