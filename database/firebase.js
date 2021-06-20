@@ -17,8 +17,9 @@ const fire = firebase.initializeApp(firebaseConfig);
 const auth = fire.auth();
 const db = fire.firestore();
 const fbStorage = fire.storage();
+const timeStamp = firebase.firestore.FieldValue.serverTimestamp;
 
-export { fire, auth, db, fbStorage };
+export { fire, auth, db, fbStorage, timeStamp };
 
 export const createUserDocument = async (user, additionalData) => {
     if (!user) return;

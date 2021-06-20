@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback } from 'react-native'
-import { useContext } from 'react/cjs/react.production.min';
-import { AuthContext } from '../Auth';
 import Title from '../components/Title'
-import { auth } from '../database/firebase';
+import { fire } from '../database/firebase';
 
 export default function LogInScreen({ navigation }) {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
-    const { currentUser } = useContext(AuthContext);
+    /* const [authenticated, setAuthenticated] = useState(false);
+    const [user, setUser] = useState(null); */
 
     const handleLogIn = async () => {
         try {
-            await auth.signInWithEmailAndPassword(email, password);
-            console.log(currentUser)
+            await fire.auth().signInWithEmailAndPassword(email, password);
+            /* setAuthenticated(true);
+            const userID = fire.auth().currentUser.uid;
+            authenticated ? setUser(userID) : null;
+            console.log(userID); */
             navigation.navigate('TabNav');
         } catch (error) {
             alert(`ERROR: ${error}`);

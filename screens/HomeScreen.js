@@ -8,16 +8,16 @@ import FilterButton from '../components/FilterButton';
 import { ModelContext } from '../model/WhatTodayModel';
 import VerifyButton from '../components/VerifyButton';
 import HomeBackground from '../components/icons/HomeBackground';
-import { AuthContext } from '../Auth';
+import { fire } from '../database/firebase';
 
 const HomeScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
-    /* const { currentUser } = useContext(AuthContext); */
-    /* console.log(uid); */
+    const userID = fire.auth().currentUser.uid;
+    console.log('HomeScreen User', userID);
 
-    const saveRecipe = async () => {
+    /* const saveRecipe = async () => {
 
-    }
+    } */
 
     useEffect(() => {
         model.loadRandomRecipe();
