@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, TextInput, Button, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Button, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 import Title from '../components/Title';
 import { auth, createUserDocument } from '../database/firebase';
+import SignUpBG from '../components/icons/signUpBG';
+import ReturnHeaderButton from '../components/ReturnHeaderButton';
 
-export default function SignUpScreen({ navigation }) {
+export default function SignUpScreen({ navigation, navigation: { goBack } }) {
     const [userName, setUserName] = useState(null);
     const [email, setEmail] = useState(null);
     const [pass, setPass] = useState(null);
@@ -25,35 +27,41 @@ export default function SignUpScreen({ navigation }) {
     }
 
     return (
-        <View style={styles.container}>
-            <Title>Sign Up</Title>
-            <TextInput placeholder="User Name" style={styles.textInput} value={userName} onChangeText={(value) => setUserName(value)} />
-            <TextInput placeholder="Email" style={styles.textInput} value={email} onChangeText={(value) => setEmail(value)} />
-            <TextInput placeholder="Password" style={styles.textInput} value={pass} onChangeText={(value) => setPass(value)} />
-            <TextInput placeholder="Repeat Password" style={styles.textInput} value={confirmPass} onChangeText={(value) => setConfirmPass(value)} />
-            <TouchableWithoutFeedback onPress={handleSignUp}>
-                <View style={styles.confirmBtn}>
-                    <Text style={styles.buttonText}>Confirm</Text>
-                </View>
-            </TouchableWithoutFeedback>
+        <View>
+            <TouchableOpacity style={styles.returnButton} onPress={() => goBack()}>
+                <ReturnHeaderButton />
+            </TouchableOpacity>
+            <SignUpBG style={styles.background} />
+            <View style={styles.container}>
+                <Title>Sign Up</Title>
+                <TextInput placeholder="User Name" placeholderTextColor="#fff" style={styles.textInput} value={userName} onChangeText={(value) => setUserName(value)} />
+                <TextInput placeholder="Email" placeholderTextColor="#fff" style={styles.textInput} value={email} onChangeText={(value) => setEmail(value)} />
+                <TextInput placeholder="Password" placeholderTextColor="#fff" style={styles.textInput} value={pass} onChangeText={(value) => setPass(value)} />
+                <TextInput placeholder="Repeat Password" placeholderTextColor="#fff" style={styles.textInput} value={confirmPass} onChangeText={(value) => setConfirmPass(value)} />
+                <TouchableWithoutFeedback onPress={handleSignUp}>
+                    <View style={styles.confirmBtn}>
+                        <Text style={styles.buttonText}>Confirm</Text>
+                    </View>
+                </TouchableWithoutFeedback>
+                
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         margin: 25,
     },
     textInput: {
-        width: '100%',
+        width: '80%',
         borderBottomWidth: 1,
-        borderColor: '#aaa',
+        borderColor: '#fff',
         paddingHorizontal: 10,
         marginBottom: 50,
-        color: 'darkgray',
+        color: 'white',
     },
     confirmBtn: {
         backgroundColor: '#FCB13A',
@@ -71,4 +79,9 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: 'white',
     },
+    background:{
+        position:'absolute',
+        top: 50,
+        zIndex:-1,
+    }
 })

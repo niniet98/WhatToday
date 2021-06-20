@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback } from 'react-native'
 import Title from '../components/Title'
 import { fire } from '../database/firebase';
+import LogInBackground from '../components/icons/loginBG'
 
 export default function LogInScreen({ navigation }) {
     const [email, setEmail] = useState(null);
@@ -24,39 +25,43 @@ export default function LogInScreen({ navigation }) {
     }
 
     return (
-        <View style={styles.container}>
-            <Title>What Today</Title>
-            <TextInput placeholder="Email" style={styles.textInput} value={email} onChangeText={(value) => setEmail(value)} />
-            <TextInput placeholder="Password" style={styles.textInput} value={password} onChangeText={(value) => setPassword(value)} />
-            <TouchableWithoutFeedback onPress={handleLogIn}>
-                <View style={styles.confirmBtn}>
-                    <Text style={styles.buttonText}>Confirm</Text>
-                </View>
-            </TouchableWithoutFeedback>
-            <View style={styles.SignUpContainer}>
-                <Text>Don't you have an account yet?</Text>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('SignUp')}>
-                    <Text style={styles.register}>Register</Text>
+        <View>
+            <View style={styles.formContainer}>
+                <Title>What Today</Title>
+                <TextInput placeholder="Email" placeholderTextColor="#fff" style={styles.textInput} value={email} onChangeText={(value) => setEmail(value)} />
+                <TextInput placeholder="Password" placeholderTextColor="#fff" style={styles.textInput} value={password} onChangeText={(value) => setPassword(value)} />
+                <TouchableWithoutFeedback onPress={handleLogIn}>
+                    <View style={styles.confirmBtn}>
+                        <Text style={styles.buttonText}>Confirm</Text>
+                    </View>
                 </TouchableWithoutFeedback>
-            </View>
-        </View >
+            </View >
+            <View style={styles.SignUpContainer}>
+                    <Text>Don't you have an account yet?</Text>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('SignUp')}>
+                        <Text style={styles.register}>Register</Text>
+                    </TouchableWithoutFeedback>
+                </View>
+                <LogInBackground style={styles.background} />
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+    formContainer: {
         justifyContent: 'center',
         alignItems: 'center',
         margin: 25,
+        paddingTop: 130
     },
     textInput: {
         width: '100%',
+        color: 'white',
         borderBottomWidth: 1,
-        borderColor: '#aaa',
+        borderColor: '#fff',
         paddingHorizontal: 10,
         marginBottom: 50,
-        color: 'darkgray',
+        
     },
     confirmBtn: {
         backgroundColor: '#FCB13A',
@@ -77,9 +82,17 @@ const styles = StyleSheet.create({
     SignUpContainer: {
         flexDirection: 'row',
         marginVertical: 70,
+        position: 'absolute',
+        bottom:'-60%',
+        left: 20
     },
     register: {
         marginHorizontal: 5,
         color: '#FC633A',
+    },
+    background:{
+        position:'absolute',
+        top: 0,
+        zIndex:-1,
     }
 })
