@@ -2,13 +2,14 @@ import { observer } from 'mobx-react';
 import React, { useContext } from 'react'
 import { View, ScrollView, Text, Button, StyleSheet, Dimensions, Image, TouchableOpacity, Modal } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
-import CategoriesBG from '../components/icons/categoriesBG';
 import { ModelContext } from '../model/WhatTodayModel';
 import Category from '../components/Category';
 import AddCategoryButton from '../components/AddCategoryButton';
 import { LinearGradient } from 'expo-linear-gradient'
-import { primaryColor } from '../styles/styles';
+import { parapraphTextSize, parapraphTextSize2, primaryColor } from '../styles/styles';
 import { useState } from 'react';
+import { TextInput } from 'react-native';
+
 
 const numColumns = 3;
 const Recipe = ({ img, counter }) => (
@@ -17,21 +18,47 @@ const Recipe = ({ img, counter }) => (
         <View style={[styles.recipe, styles.rotationLeft]}><Image style={styles.picture} source={{ uri: img }} /></View>
 );
 
+
 const SaveScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
 
-    const [modalVisible, setModalVisible] = useState(false);
+    //------------------------------------//
 
-    let categorysContent = model.categorys.map((category) => {
-        return <Category children={category} />
+    const [modalVisible, setModalVisible] = useState(false);
+    const [categoryText, setCategoryText] = useState("");
+
+    //------------------------------------//
+
+    let categorysContent = model.categorys.map((category, idx) => {
+        return <Category children={category} key={idx} />
     });
+
+    //------------------------------------//
 
     return (
         <View style={styles.screen}>
 
             <Modal animationType="slide" transparent={true} visible={modalVisible} onRequestClose={() => { setModalVisible((modalVisible) => !modalVisible) }}>
-                <Text style={{ backgroundColor: "red" }}>Hola</Text>
-                <Button title="cierra el modal" onPress={() => setModalVisible(!modalVisible)} />
+                <View style={styles.backgroundModal}>
+                    <Text style={styles.textModal}>New category</Text>
+                    <TextInput
+                        style={styles.textInputModal}
+                        placeholder="e.g. Frappes"
+                        placeholderTextColor={primaryColor}
+                        textAlign="center"
+                        value={categoryText}
+                        onChangeText={(newText) => setCategoryText(newText)}
+                    />
+                    <TouchableOpacity onPress={() => {
+                        setModalVisible(!modalVisible);
+                        model.addCategory(categoryText);
+                        setCategoryText("");
+                    }}>
+                        <View style={styles.buttonModal}>
+                            <Text style={styles.buttonTextModal}>Create</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </Modal>
 
             <FlatList
@@ -51,8 +78,6 @@ const SaveScreen = observer(({ navigation }) => {
                 )}
                 numColumns={numColumns}
             />
-
-            {/* <CategoriesBG style={styles.categoriesContainer} /> */}
 
             <LinearGradient
                 // Button Linear Gradient
@@ -75,7 +100,9 @@ const SaveScreen = observer(({ navigation }) => {
     )
 });
 
+
 export default SaveScreen;
+
 
 const screenHeight = Dimensions.get("window").height;
 const screenWidth = Dimensions.get("window").width;
@@ -134,5 +161,48 @@ const styles = StyleSheet.create({
     categoryButton: {
         position: "absolute",
         top: -30
-    }
+    },
+    textModal: {
+        color: primaryColor,
+        fontFamily: 'Poppins-Bold',
+        fontSize: 20,
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        margin: 10
+    },
+    backgroundModal: {
+        justifyContent: "center",
+        alignItems: "center",
+        alignSelf: "center",
+        padding: 5,
+        position: "absolute",
+        top: screenHeight / 10,
+        backgroundColor: "white",
+        width: screenWidth / 1.5,
+        elevation: 10,
+        borderRadius: 15,
+    },
+    textInputModal: {
+        width: "75%",
+        borderBottomWidth: 1,
+        borderColor: primaryColor,
+        color: primaryColor,
+        fontSize: parapraphTextSize2,
+        margin: 10,
+    },
+    buttonModal: {
+        margin: 15,
+        height: 24,
+        borderRadius: 15,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        justifyContent: 'center',
+        backgroundColor: primaryColor
+    },
+    buttonTextModal: {
+        textAlign: 'center',
+        fontSize: parapraphTextSize,
+        alignItems: 'stretch',
+        color: "white"
+    },
 })

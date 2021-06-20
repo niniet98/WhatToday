@@ -16,7 +16,7 @@ class WhatTodayModel {
         this.favRecipes = [];      //aqui anem guardant totes les receptes Likeadas
         this.filters = [];       //array per guardar els filtres (de moment filtres de paisos per ferho mes facil, despres ja podem canviar)
         this.recipeInfo = null;
-        this.categorys = ["Pasta", "MEAT", "Fish", "Vegan", "Xd", "blablablablablablablablablabla"];  //array per anar guardant les categories que vagi creant l'usuari
+        this.categorys = [];  //array per anar guardant les categories que vagi creant l'usuari
 
         makeObservable(this, {
             randomRecipe: observable,
@@ -27,6 +27,7 @@ class WhatTodayModel {
             addFavRecipe: action,
             loadRandomRecipe: action,
             addFilter: action,
+            addCategory: action,
             removeFilter: action,
             setRandomRecipe: action,
             setRecipeInfo: action,
@@ -42,6 +43,10 @@ class WhatTodayModel {
 
     addFilter(filter) {
         this.filters.push(filter);
+    }
+
+    addCategory(category) {
+        this.categorys.push(category);
     }
 
     removeFilter(filter) {
