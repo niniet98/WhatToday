@@ -72,6 +72,7 @@ const InfoScreen = observer(({ route, navigation: { goBack } }) => {
                             <InfoTags cuisines={recipeInfo.cuisines} dishTypes={recipeInfo.dishTypes} />
                         </View>
                     </ScrollView>
+                    <View></View>
                     <InfoDetalladaBG style={styles.svg} />
                 </View>
             </Animated.ScrollView>
@@ -132,6 +133,7 @@ const styles = StyleSheet.create({
         color: 'white',
         alignSelf: 'center',
         padding: 20,
+        fontSize: 14
     },
     tags: {
         zIndex: 1,
@@ -150,7 +152,7 @@ const styles = StyleSheet.create({
         width: screenWidth,
         alignItems: 'center',
         justifyContent: 'center',
-        height: 400,
+        height: 350,
 
     },
     emptyScreen: {
