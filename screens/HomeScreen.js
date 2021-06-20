@@ -35,7 +35,7 @@ const HomeScreen = observer(({ navigation }) => {
         <View style={{ backgroundColor: "white" }}>
             <HomeBackground style={styles.bg} />
             <View style={styles.screen}>
-                <ScrollView horizontal={true} style={styles.filtersContainer}>
+                <ScrollView horizontal={true} style={styles.filtersContainer} decelerationRate="fast">
                     <FilterButton filter="Mexican" />
                     <FilterButton filter="Japanese" />
                     <FilterButton filter="American" />

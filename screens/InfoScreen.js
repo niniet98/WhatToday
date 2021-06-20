@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "white"
     },
-    separator:{
+    separator: {
         width: 250,
         height: 2,
         backgroundColor: 'white',
