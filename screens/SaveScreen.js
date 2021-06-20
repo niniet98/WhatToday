@@ -26,9 +26,18 @@ const Recipe = ({ img, counter }) => (
         </View>
 );
 
-const FilteredRecipes = ({ data }) => (
+const FilteredRecipes = () => {
+    const model = useContext(ModelContext);
+    let filteredArray = [];
+    model.recipesWithCategorys.forEach((object) => {
+        if (object.category === model.activeCategory) {
+            filteredArray.push(object);
+        }
+    });
+    console.log(filteredArray);
+    return(
     <FlatList
-        data={data}
+        data={filteredArray}
         renderItem={({ item, index }) => (
             index % 3 == 1 ?
                 <View>
@@ -55,7 +64,7 @@ const FilteredRecipes = ({ data }) => (
         )}
         numColumns={numColumns}
     />
-);
+    );}
 
 
 const SaveScreen = observer(({ navigation }) => {
@@ -144,7 +153,7 @@ const SaveScreen = observer(({ navigation }) => {
 
     //------------------------------------//
 
-    let filteredArray = [];
+    
 
     let recipesContent = model.activeCategory === null ?
         <FlatList
@@ -176,12 +185,8 @@ const SaveScreen = observer(({ navigation }) => {
             numColumns={numColumns}
         />
         :
-        model.recipesWithCategorys.forEach((object) => {
-            if (object.category === model.activeCategory) {
-                filteredArray.push(object);
-            }
-        });
-    <FilteredRecipes data={filteredArray} />
+        
+        <FilteredRecipes />
         ;
 
 

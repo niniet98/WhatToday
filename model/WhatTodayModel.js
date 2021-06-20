@@ -15,7 +15,7 @@ const URL_BASE = 'https://api.spoonacular.com/recipes';
 //const apiKey = "8ed7012c44244256b1d45a8751d557fa" // mario 4
 //const apiKey = "cdf982d07e1946d585219202dc10cb26"; //apikey jose
 //const apiKey = "409f72c07c6e417fb089c932c749b2ff";   //apikey jose 2
-const apiKey = "6e57aa9620364cd6b8e7db09cabce573" //josep
+const apiKey = "8ed7012c44244256b1d45a8751d557fa";   //apikey jose 2
 const numberOfRecipes = 1;  //anirem d'una en una
 
 
@@ -25,7 +25,7 @@ class WhatTodayModel {
         this.favRecipes = [];      //aqui anem guardant totes les receptes Likeadas
         this.filters = [];       //array per guardar els filtres (de moment filtres de paisos per ferho mes facil, despres ja podem canviar)
         this.recipeInfo = null;
-        this.categorys = ["pasta", "meat", "xd"];  //array per anar guardant les categories que vagi creant l'usuari
+        this.categorys = [];  //array per anar guardant les categories que vagi creant l'usuari
         this.activeCategory = null;
         this.recipesWithCategorys = [];
 
