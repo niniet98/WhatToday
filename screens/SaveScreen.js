@@ -158,7 +158,7 @@ const SaveScreen = observer(({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                         <TouchableOpacity onPress={() => navigation.navigate("Info", { id: item.id })}>
-                            <Recipe key={item.id} img={item.img} counter={index} />
+                            <Recipe key={item.id} img={item.url} counter={index} />
                         </TouchableOpacity>
                     </View>
                     :
@@ -169,7 +169,7 @@ const SaveScreen = observer(({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                         <TouchableOpacity style={styles.columnaSenar} onPress={() => navigation.navigate("Info", { id: item.id })}>
-                            <Recipe key={item.id} img={item.img} counter={index} />
+                            <Recipe key={item.id} img={item.url} counter={index} />
                         </TouchableOpacity>
                     </View>
             )}

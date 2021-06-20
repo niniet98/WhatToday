@@ -10,6 +10,7 @@ import ReturnHeaderButton from '../components/ReturnHeaderButton';
 import { getRecipeInfo, ModelContext } from '../model/WhatTodayModel';
 import ModalSelector from 'react-native-modal-selector';
 import { useContext } from 'react';
+import { db, fire } from '../database/firebase';
 
 
 const BANNER_H = 350;
@@ -35,8 +36,35 @@ const InfoScreen = observer(({ route, navigation: { goBack } }) => {
 
     //----------------------//
 
+    const userID = fire.auth().currentUser.uid;
+    const [categories, setCategories] = useState([]);
+    const dataModalSelect = [];
+
+    const getCategories = () => {
+        db.collection('users/' + userID + '/Categories').onSnapshot((querySnapshot) => {
+            const docs = [];
+            querySnapshot.forEach((doc) => {
+                docs.push({ ...doc.data(), id: doc.id });
+            })
+            setCategories(docs);
+        })
+    }
+
+    categories.forEach((doc) => {
+        console.log('entra');
+        dataModalSelect.push({
+            key: doc.id,
+            label: doc.category
+        });
+    })
+    console.log(dataModalSelect);
+
+
+    /* console.log(categories); */
+
     useEffect(() => {
         getRecipeInfo(id, setRecipeInfo);
+        getCategories();
     }, []);
 
     if (recipeInfo === null) {
@@ -75,7 +103,7 @@ const InfoScreen = observer(({ route, navigation: { goBack } }) => {
                     <Text style={styles.title}>{recipeInfo.nutrition.nutrients[0].amount}Kcal</Text>
 
                     <View style={styles.modalSelector}>
-                        <ModalSelector data={data} initValue="Select a category for this recipe" onChange={(option) => { model.setCategory(id, option.label, recipeInfo.image) }} />
+                        <ModalSelector data={dataModalSelect} initValue="Select a category for this recipe" onChange={(option) => { setCategory(option)/* model.setCategory(id, option.label, recipeInfo.image); */ }} />
                     </View>
 
                     <Text style={styles.summary}>{recipeInfo.summary}</Text>
