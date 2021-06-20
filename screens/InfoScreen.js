@@ -55,6 +55,7 @@ const InfoScreen = observer(({ route, navigation: { goBack } }) => {
                     <Text style={[styles.title, { marginTop: 20 }]}>{recipeInfo.title}</Text>
                     <Text style={styles.title}>{recipeInfo.nutrition.nutrients[0].amount}Kcal</Text>
                     <Text style={styles.summary}>{recipeInfo.summary}</Text>
+                    <View style={styles.separator}></View>
                     <ScrollView
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
@@ -68,7 +69,7 @@ const InfoScreen = observer(({ route, navigation: { goBack } }) => {
                             <Directions steps={recipeInfo.analyzedInstructions[0].steps} />
                         </View>
                         <View style={styles.pages}>
-                            <InfoTags />
+                            <InfoTags cuisines={recipeInfo.cuisines} dishTypes={recipeInfo.dishTypes} />
                         </View>
                     </ScrollView>
                     <InfoDetalladaBG style={styles.svg} />
@@ -149,7 +150,7 @@ const styles = StyleSheet.create({
         width: screenWidth,
         alignItems: 'center',
         justifyContent: 'center',
-        height: 500,
+        height: 400,
 
     },
     emptyScreen: {
@@ -158,4 +159,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "white"
     },
+    separator:{
+        width: 250,
+        height: 2,
+        backgroundColor: 'white',
+        alignSelf: 'center',
+        zIndex: 3,
+        marginBottom: 20
+    }
 })

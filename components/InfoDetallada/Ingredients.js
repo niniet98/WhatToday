@@ -1,20 +1,32 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View, FlatList } from 'react-native';
 
 export default function Ingredients({ extendedIngredients }) {
     return (
         <View style={{ position: 'absolute', top: 0 }}>
             <View><Text style={styles.titleText}>INGREDIENTS</Text></View>
             <View style={styles.container}>
-                {extendedIngredients.map((ingredient) => {
+                {extendedIngredients.map((ingredient, index) => {
                     return (
-                        <View key={ingredient.name} style={styles.ingredientsContainer}>
+                        <View key={index} style={styles.ingredientsContainer}>
                             <View style={[styles.img, { elevation: 20 }]}><Image style={styles.img} source={{ uri: `https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}` }} /></View>
                             <Text style={styles.ingredientText}>{ingredient.name}</Text>
                             <Text style={[styles.ingredientText, { fontWeight: 'bold' }]}>{ingredient.measures.metric.amount}{ingredient.measures.metric.unitShort}</Text>
                         </View>
                     )
                 })}
+                {/* <FlatList
+                    data={extendedIngredients}
+                    renderItem={({ item }) => (
+                        <View style={styles.ingredientsContainer}>
+                            <View style={[styles.img, { elevation: 20 }]}><Image style={styles.img} source={{ uri: `https://spoonacular.com/cdn/ingredients_100x100/${item.image}` }} /></View>
+                            <Text style={styles.ingredientText}>{item.name}</Text>
+                            <Text style={[styles.ingredientText, { fontWeight: 'bold' }]}>{item.measures.metric.amount}{item.measures.metric.unitShort}</Text>
+                        </View>
+                    )}
+                    keyExtractor={(item) => String(item.id)}
+                    numColumns={3}
+                /> */}
             </View>
         </View>
     )
@@ -41,7 +53,7 @@ const styles = StyleSheet.create({
     },
     ingredientText: {
         color: 'white',
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: 'normal',
         zIndex: 4,
         textAlign: 'center'
@@ -51,7 +63,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: 'white',
         fontWeight: 'bold',
-        fontSize: 14,
+        fontSize: 20,
 
     }
 })
