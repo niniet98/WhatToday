@@ -6,7 +6,7 @@ import { ModelContext } from '../model/WhatTodayModel';
 import Category from '../components/Category';
 import AddCategoryButton from '../components/AddCategoryButton';
 import { LinearGradient } from 'expo-linear-gradient'
-import { primaryColor } from '../styles/styles';
+import { parapraphTextSize, parapraphTextSize2, primaryColor } from '../styles/styles';
 import { useState } from 'react';
 import { TextInput } from 'react-native';
 
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: primaryColor,
         color: primaryColor,
-        fontSize: 16,
+        fontSize: parapraphTextSize2,
         margin: 10,
     },
     buttonModal: {
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     },
     buttonTextModal: {
         textAlign: 'center',
-        fontSize: 14,
+        fontSize: parapraphTextSize,
         alignItems: 'stretch',
         color: "white"
     },
