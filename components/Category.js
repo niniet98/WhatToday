@@ -24,7 +24,7 @@ export default function Category({ children }) {
                 setPressed(prevState => !prevState);
                 if (!pressed) {
                     model.setActiveCategory(children);
-                }
+                } else{model.setActiveCategory(null)}
             }}>
                 <View style={[styles.button, extraStyle]}>
                     <Text style={styles.text}>{children}</Text>
