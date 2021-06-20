@@ -5,8 +5,8 @@ import React, { createContext } from "react";
 const URL_BASE = 'https://api.spoonacular.com/recipes';
 //const apiKey = "6b7427f391974de5921bcd793e67086e";
 //const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
-const apiKey = "f8b7ed4858454125a22606a37be0b9d0"; //apiKey mario 2
-//const apiKey = "40c1982b35bb441a8f82db372ebe7d9c"; //apiKey mario 3
+//const apiKey = "f8b7ed4858454125a22606a37be0b9d0"; //apiKey mario 2
+const apiKey = "40c1982b35bb441a8f82db372ebe7d9c"; //apiKey mario 3
 const numberOfRecipes = 1;  //anirem d'una en una
 
 
@@ -16,12 +16,14 @@ class WhatTodayModel {
         this.favRecipes = [];      //aqui anem guardant totes les receptes Likeadas
         this.filters = [];       //array per guardar els filtres (de moment filtres de paisos per ferho mes facil, despres ja podem canviar)
         this.recipeInfo = null;
+        this.categorys = ["Pasta", "MEAT", "Fish", "Vegan", "Xd", "blablablablablablablablablabla"];  //array per anar guardant les categories que vagi creant l'usuari
 
         makeObservable(this, {
             randomRecipe: observable,
             favRecipes: observable,
             filters: observable,
             recipeInfo: observable,
+            categorys: observable,
             addFavRecipe: action,
             loadRandomRecipe: action,
             addFilter: action,
@@ -40,7 +42,6 @@ class WhatTodayModel {
 
     addFilter(filter) {
         this.filters.push(filter);
-        console.log(this.filters);
     }
 
     removeFilter(filter) {

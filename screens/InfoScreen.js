@@ -11,7 +11,7 @@ import { getRecipeInfo } from '../model/WhatTodayModel';
 
 const BANNER_H = 350;
 
-const InfoScreen = observer(({route, navigation: { goBack }}) => {
+const InfoScreen = observer(({ route, navigation: { goBack } }) => {
     const { id } = route.params;
     const [recipeInfo, setRecipeInfo] = useState(null);
     const scrollA = useRef(new Animated.Value(0)).current;
@@ -28,52 +28,52 @@ const InfoScreen = observer(({route, navigation: { goBack }}) => {
         )
     }
 
-    
+
     return (
         <View>
             <TouchableOpacity style={styles.returnButton} onPress={() => goBack()}>
-                <ReturnHeaderButton  />
+                <ReturnHeaderButton />
             </TouchableOpacity>
             <Animated.ScrollView
                 onScroll={Animated.event(
-                [{nativeEvent: {contentOffset: {y: scrollA}}}],
-                {useNativeDriver: true},
+                    [{ nativeEvent: { contentOffset: { y: scrollA } } }],
+                    { useNativeDriver: true },
                 )}
                 scrollEventThrottle={16}
             >
                 <View style={styles.bannerContainer}>
-                <Animated.Image
-                    style={styles.banner(scrollA)}
-                    source={{ uri: recipeInfo.image }}
-                />
+                    <Animated.Image
+                        style={styles.banner(scrollA)}
+                        source={{ uri: recipeInfo.image }}
+                    />
                 </View>
                 <View>
                     <View style={styles.tags}>
                         <InfoTag children={`${recipeInfo.readyInMinutes} min`} />
                         <InfoTag children={`${recipeInfo.servings} servings`} />
-                    </View>   
-                    <Text style={[styles.title, {marginTop:20}]}>{recipeInfo.title}</Text>
-                    <Text style={styles.title}>{recipeInfo.nutrition.nutrients[0].amount}Kcal</Text> 
-                    <Text style={styles.summary}>{recipeInfo.summary}</Text> 
-                    <ScrollView   
+                    </View>
+                    <Text style={[styles.title, { marginTop: 20 }]}>{recipeInfo.title}</Text>
+                    <Text style={styles.title}>{recipeInfo.nutrition.nutrients[0].amount}Kcal</Text>
+                    <Text style={styles.summary}>{recipeInfo.summary}</Text>
+                    <ScrollView
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         pagingEnabled={true}
-                        style={{zIndex:4}}
-                        >
-                            <View style={styles.pages}>
-                                <Ingredients extendedIngredients={recipeInfo.extendedIngredients} />
-                            </View>   
-                            <View style={styles.pages}>
-                                <Directions steps={recipeInfo.analyzedInstructions[0].steps} />
-                            </View> 
-                            <View style={styles.pages}>
-                                <InfoTags />
-                            </View> 
+                        style={{ zIndex: 4 }}
+                    >
+                        <View style={styles.pages}>
+                            <Ingredients extendedIngredients={recipeInfo.extendedIngredients} />
+                        </View>
+                        <View style={styles.pages}>
+                            <Directions steps={recipeInfo.analyzedInstructions[0].steps} />
+                        </View>
+                        <View style={styles.pages}>
+                            <InfoTags />
+                        </View>
                     </ScrollView>
                     <InfoDetalladaBG style={styles.svg} />
                 </View>
-            </Animated.ScrollView>            
+            </Animated.ScrollView>
         </View>
     )
 })
@@ -94,56 +94,56 @@ const styles = StyleSheet.create({
         height: BANNER_H,
         width: '200%',
         transform: [
-          {
-            translateY: scrollA.interpolate({
-              inputRange: [-BANNER_H, 0, BANNER_H, BANNER_H + 1],
-              outputRange: [-BANNER_H / 2, 0, BANNER_H * 0.75, BANNER_H * 0.75],
-            }),
-          },
-          {
-            scale: scrollA.interpolate({
-              inputRange: [-BANNER_H, 0, BANNER_H, BANNER_H + 1],
-              outputRange: [2, 1, 0.5, 0.5],
-            }),
-          },
+            {
+                translateY: scrollA.interpolate({
+                    inputRange: [-BANNER_H, 0, BANNER_H, BANNER_H + 1],
+                    outputRange: [-BANNER_H / 2, 0, BANNER_H * 0.75, BANNER_H * 0.75],
+                }),
+            },
+            {
+                scale: scrollA.interpolate({
+                    inputRange: [-BANNER_H, 0, BANNER_H, BANNER_H + 1],
+                    outputRange: [2, 1, 0.5, 0.5],
+                }),
+            },
         ],
-      }),
-    img:{
+    }),
+    img: {
         width: screenWidth,
-        height: screenHeight*(2/3),
-        zIndex:-1,
+        height: screenHeight * (2 / 3),
+        zIndex: -1,
     },
-    svg:{
+    svg: {
         position: 'absolute',
         top: -115,
     },
-    title:{
-        zIndex:1,
+    title: {
+        zIndex: 1,
         color: 'white',
         fontFamily: 'Poppins-Bold',
         fontSize: 18,
         fontWeight: 'bold',
         alignSelf: 'center',
-        
+
     },
-    summary:{
-        zIndex:1,
-        color:'white',
-        alignSelf:'center',
+    summary: {
+        zIndex: 1,
+        color: 'white',
+        alignSelf: 'center',
         padding: 20,
     },
     tags: {
-        zIndex:1,
+        zIndex: 1,
         position: 'absolute',
         top: -80,
         alignItems: 'flex-end',
         right: 20
     },
-    returnButton:{
+    returnButton: {
         zIndex: 2,
         position: 'absolute',
-        top:0,
-        
+        top: 0,
+
     },
     pages: {
         width: screenWidth,
@@ -151,5 +151,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: 500,
 
+    },
+    emptyScreen: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "white"
     },
 })

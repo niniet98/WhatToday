@@ -38,9 +38,10 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Bold',
         textAlign: "center",
         fontWeight: 'bold',
+        textTransform: 'uppercase',
     },
     buttonPressed: {
-        opacity: .65
+        opacity: .55
     },
     buttonNotPressed: {
         opacity: 1

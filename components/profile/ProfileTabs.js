@@ -19,12 +19,12 @@ export default function ProfileTabs() {
 
     return (
         <View style={styles.container}>
-            <TouchableWithoutFeedback onPress={() => { gridSetPressed((prevPressed) => !prevPressed); chefSetPressed((prevPressed) => !prevPressed) }}>
+            <TouchableWithoutFeedback onPress={() => { gridSetPressed(true); chefSetPressed(false) }}>
                 <View style={[styles.button, gridSelectedStyle]}>
                     <Grid />
                 </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => { gridSetPressed((prevPressed) => !prevPressed); chefSetPressed((prevPressed) => !prevPressed) }}>
+            <TouchableWithoutFeedback onPress={() => { gridSetPressed(false); chefSetPressed(true) }}>
                 <View style={[styles.button, chefSelectedStyle]}>
                     <MediumChef />
                 </View>

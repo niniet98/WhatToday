@@ -43,8 +43,11 @@ const HomeScreen = observer(({ navigation }) => {
                     <FilterButton filter="Chinese" />
                     <FilterButton filter="African" />
                     <FilterButton filter="Nordic" />
+                    <FilterButton filter="Greek" />
                     <FilterButton filter="Irish" />
                     <FilterButton filter="British" />
+                    <FilterButton filter="Latin American" />
+                    <FilterButton filter="Mediterranean" />
                 </ScrollView>
                 <Cards />
                 <View style={styles.fade1}></View>

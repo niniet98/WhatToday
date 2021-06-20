@@ -1,20 +1,36 @@
+import { observer } from 'mobx-react'
 import React from 'react'
-import { View, Text, StyleSheet, FlatList } from 'react-native'
-import GetRecipes from '../components/profile/GetRecipes'
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import { useContext } from 'react'
+import FavRecipeImage from '../components/profile/FavRecipeImage';
 import Profile from '../components/profile/Profile'
 import ProfileTabs from '../components/profile/ProfileTabs'
+import { ModelContext } from '../model/WhatTodayModel'
 
-export default function ProfileScreen() {
+const ProfileScreen = observer(({ navigation }) => {
+    const model = useContext(ModelContext);
+
     return (
         <View style={styles.container}>
             <View style={{ height: 10 }}></View>
             <Profile />
             <ProfileTabs />
             <View style={{ height: 29 }}></View>
-            <GetRecipes />
+            <FlatList
+                data={model.favRecipes.slice()}
+                renderItem={({ item }) => (
+                    <TouchableOpacity onPress={() => navigation.navigate("Info", { id: item.id })}>
+                        <FavRecipeImage image={item.img} />
+                    </TouchableOpacity>
+                )}
+                keyExtractor={(item, index) => `${index}`}
+                numColumns={3}
+            />
         </View>
     )
-}
+});
+
+export default ProfileScreen;
 
 const styles = StyleSheet.create({
     container: {
