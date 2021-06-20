@@ -29,9 +29,13 @@ const SaveScreen = observer(({ navigation }) => {
 
     //------------------------------------//
 
-    let categorysContent = model.categorys.map((category, idx) => {
-        return <Category children={category} key={idx} />
-    });
+    let categorysContent = model.categorys.length === 0 ?
+        <Text style={styles.message}>Click on the button to add a new category!</Text>
+        :
+        <ScrollView style={styles.categoriesScroll} horizontal decelerationRate="fast" showsHorizontalScrollIndicator >
+            {model.categorys.map((category, idx) => { return <Category key={idx}>{category}</Category> })}
+        </ScrollView>
+        ;
 
     //------------------------------------//
 
@@ -43,7 +47,7 @@ const SaveScreen = observer(({ navigation }) => {
                     <Text style={styles.textModal}>New category</Text>
                     <TextInput
                         style={styles.textInputModal}
-                        placeholder="e.g. Frappes"
+                        placeholder="e.g. Pasta"
                         placeholderTextColor={primaryColor}
                         textAlign="center"
                         value={categoryText}
@@ -145,15 +149,15 @@ const styles = StyleSheet.create({
     },
     categoriesContainer: {
         backgroundColor: primaryColor,
-        height: 360,
+        height: 240,
         width: screenWidth,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         flexWrap: 'wrap',
         flexDirection: 'row',
         justifyContent: 'center',
-        paddingTop: 40,
-        elevation: 7,
+        paddingTop: 23,
+        elevation: 10,
     },
     columnaSenar: {
         marginTop: 40,
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         padding: 5,
         position: "absolute",
-        top: screenHeight / 10,
+        top: screenHeight / 4,
         backgroundColor: "white",
         width: screenWidth / 1.5,
         elevation: 10,
@@ -205,4 +209,16 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         color: "white"
     },
+    categoriesScroll: {
+        marginHorizontal: 12,
+        marginVertical: 15,
+    },
+    message: {
+        color: "white",
+        opacity: .5,
+        fontFamily: 'Poppins-Bold',
+        fontSize: parapraphTextSize2,
+        fontWeight: 'bold',
+        marginTop: 50
+    }
 })

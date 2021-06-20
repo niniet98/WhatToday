@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import InfoTag from '../InfoTag'
+import Slider from "../icons/slider3";
 
 
 
@@ -24,18 +25,24 @@ export default function InfoTags({cuisines, dishTypes}) {
         return d
     }
     return (
-        <View style={{position:'absolute', top: 0}}>
+        <View style={styles.container}>
             <Text style={styles.title}>TAGS</Text>
-            <View style={styles.container}>
+            <View style={styles.tagsContainer}>
                 <CuisineList />
                 <DishList />
             </View>
+            {/* sentim fer-ho així de cutre però no ens funcionava i 
+            d'alguna manera havíem d'indicar que es podia fer scroll horitzontal */}
+            <Slider style={{marginVertical:20}} />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container:{
+        position:'absolute', top: 0, alignItems:'center'
+    },
+    tagsContainer:{
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',

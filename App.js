@@ -30,7 +30,7 @@ export default function App() {
   return (
     <ModelProvider>
       <NavigationContainer>
-        <StatusBar></StatusBar>
+        <StatusBar barStyle="light-content" />
         <Stack.Navigator initialRouteName="LogIn" screenOptions={{ headerShown: false /* headerTitle: null, headerTransparent: true */ }}>
           <Stack.Screen name="LogIn" component={LogInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />

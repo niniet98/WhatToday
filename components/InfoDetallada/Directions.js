@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
+import Slider from "../icons/slider2";
 
 export default function Directions({ steps }) {
   return (
@@ -15,7 +16,9 @@ export default function Directions({ steps }) {
         keyExtractor={(item) => String(item.number)}
         numColumns={1}
       />
-      
+      {/* sentim fer-ho així de cutre però no ens funcionava i 
+      d'alguna manera havíem d'indicar que es podia fer scroll horitzontal */}
+      <Slider style={{marginVertical:20}} />
     </View>
   );
 }
