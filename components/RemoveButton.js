@@ -4,7 +4,7 @@ import RemoveCategory from './icons/removeCategory';
 
 
 
-export default function RemoveCategoryButton() {
+export default function RemoveButton() {
 
     return (
         <View style={styles.circle}>

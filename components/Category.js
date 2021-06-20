@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 import { accentColor } from '../styles/styles';
-import RemoveCategoryButton from "./RemoveCategoryButton";
+import RemoveButton from "./RemoveButton";
 import Demo from './Demo'
+import { useContext } from 'react';
+import { ModelContext } from '../model/WhatTodayModel';
 
 export default function Category({ children }) {
+    const model = useContext(ModelContext);
 
     const [pressed, setPressed] = useState(false);
 
@@ -13,8 +16,8 @@ export default function Category({ children }) {
     return (
         <View>
             <View style={{ position: "absolute", zIndex: 1, top: 0, right: 0 }}>
-                <TouchableOpacity onPress={() => console.log("xd")}>
-                    <RemoveCategoryButton />
+                <TouchableOpacity onPress={() => model.removeCategory(children)}>
+                    <RemoveButton />
                 </TouchableOpacity>
             </View>
             <TouchableWithoutFeedback onPress={() => setPressed(prevState => !prevState)}>

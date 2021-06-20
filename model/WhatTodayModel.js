@@ -30,6 +30,7 @@ class WhatTodayModel {
             filters: observable,
             recipeInfo: observable,
             categorys: observable,
+            removeCategory: observable,
             addFavRecipe: action,
             loadRandomRecipe: action,
             addFilter: action,
@@ -58,6 +59,11 @@ class WhatTodayModel {
     removeFilter(filter) {
         let index = this.filters.indexOf(filter);
         this.filters.splice(index, 1);
+    }
+
+    removeCategory(category) {
+        let index = this.categorys.indexOf(category);
+        this.categorys.splice(index, 1);
     }
 
     setRandomRecipe(recipe) {
