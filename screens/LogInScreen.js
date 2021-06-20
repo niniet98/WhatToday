@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback } from 'react-native'
+import { useContext } from 'react/cjs/react.production.min';
+import { AuthContext } from '../Auth';
 import Title from '../components/Title'
 import { auth } from '../database/firebase';
 
@@ -7,9 +9,12 @@ export default function LogInScreen({ navigation }) {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
+    const { currentUser } = useContext(AuthContext);
+
     const handleLogIn = async () => {
         try {
             await auth.signInWithEmailAndPassword(email, password);
+            console.log(currentUser)
             navigation.navigate('TabNav');
         } catch (error) {
             alert(`ERROR: ${error}`);
