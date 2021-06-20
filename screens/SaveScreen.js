@@ -26,45 +26,52 @@ const Recipe = ({ img, counter }) => (
         </View>
 );
 
-const FilteredRecipes = () => {
+const FilteredRecipes = ({ recipes }) => {
     const model = useContext(ModelContext);
     let filteredArray = [];
-    model.recipesWithCategorys.forEach((object) => {
+    /* model.recipesWithCategorys.forEach((object) => {
         if (object.category === model.activeCategory) {
             filteredArray.push(object);
         }
-    });
+    }); */
+    recipes.forEach((object) => {
+        if (object.category === model.activeCategory) {
+            filteredArray.push(object);
+        }
+    })
+
     console.log(filteredArray);
-    return(
-    <FlatList
-        data={filteredArray}
-        renderItem={({ item, index }) => (
-            index % 3 == 1 ?
-                <View>
-                    <View style={{ position: "absolute", zIndex: 1, top: 0, right: 5 }}>
-                        <TouchableOpacity onPress={() => model.removeFavRecipe(item.image)}>
-                            <RemoveButton />
+    return (
+        <FlatList
+            data={filteredArray}
+            renderItem={({ item, index }) => (
+                index % 3 == 1 ?
+                    <View>
+                        <View style={{ position: "absolute", zIndex: 1, top: 0, right: 5 }}>
+                            <TouchableOpacity onPress={() => model.removeFavRecipe(item.image)}>
+                                <RemoveButton />
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity onPress={() => navigation.navigate("Info", { id: item.recipe })}>
+                            <Recipe key={item.recipe} img={item.url} counter={index} />
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={() => navigation.navigate("Info", { id: item.recipe })}>
-                        <Recipe key={item.recipe} img={item.image} counter={index} />
-                    </TouchableOpacity>
-                </View>
-                :
-                <View>
-                    <View style={{ position: "absolute", zIndex: 1, top: 40, right: 10 }}>
-                        <TouchableOpacity onPress={() => model.removeFavRecipe(item.image)}>
-                            <RemoveButton />
+                    :
+                    <View>
+                        <View style={{ position: "absolute", zIndex: 1, top: 40, right: 10 }}>
+                            <TouchableOpacity onPress={() => model.removeFavRecipe(item.image)}>
+                                <RemoveButton />
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity style={styles.columnaSenar} onPress={() => navigation.navigate("Info", { id: item.recipe })}>
+                            <Recipe key={item.recipe} img={item.url} counter={index} />
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.columnaSenar} onPress={() => navigation.navigate("Info", { id: item.recipe })}>
-                        <Recipe key={item.recipe} img={item.image} counter={index} />
-                    </TouchableOpacity>
-                </View>
-        )}
-        numColumns={numColumns}
-    />
-    );}
+            )}
+            numColumns={numColumns}
+        />
+    );
+}
 
 
 const SaveScreen = observer(({ navigation }) => {
@@ -89,7 +96,7 @@ const SaveScreen = observer(({ navigation }) => {
         await db.collection('users/' + userID + '/FavRecipes').onSnapshot((querySnapshot) => {
             const docs = [];
             querySnapshot.forEach((doc) => {
-                docs.push({ ...doc.data() });
+                docs.push({ ...doc.data(), rId: doc.id });
             });
             setRecipes(docs);
         })
@@ -153,7 +160,7 @@ const SaveScreen = observer(({ navigation }) => {
 
     //------------------------------------//
 
-    
+
 
     let recipesContent = model.activeCategory === null ?
         <FlatList
@@ -166,7 +173,7 @@ const SaveScreen = observer(({ navigation }) => {
                                 <RemoveButton />
                             </TouchableOpacity>
                         </View>
-                        <TouchableOpacity onPress={() => navigation.navigate("Info", { id: item.id })}>
+                        <TouchableOpacity onPress={() => navigation.navigate("Info", { id: item.id, rId: item.rId })}>
                             <Recipe key={item.id} img={item.url} counter={index} />
                         </TouchableOpacity>
                     </View>
@@ -177,7 +184,7 @@ const SaveScreen = observer(({ navigation }) => {
                                 <RemoveButton />
                             </TouchableOpacity>
                         </View>
-                        <TouchableOpacity style={styles.columnaSenar} onPress={() => navigation.navigate("Info", { id: item.id })}>
+                        <TouchableOpacity style={styles.columnaSenar} onPress={() => navigation.navigate("Info", { id: item.id, rId: item.rId })}>
                             <Recipe key={item.id} img={item.url} counter={index} />
                         </TouchableOpacity>
                     </View>
@@ -185,8 +192,8 @@ const SaveScreen = observer(({ navigation }) => {
             numColumns={numColumns}
         />
         :
-        
-        <FilteredRecipes />
+
+        <FilteredRecipes recipes={recipes} />
         ;
 
 

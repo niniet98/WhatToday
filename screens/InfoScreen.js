@@ -11,12 +11,14 @@ import { getRecipeInfo, ModelContext } from '../model/WhatTodayModel';
 import ModalSelector from 'react-native-modal-selector';
 import { useContext } from 'react';
 import { db, fire } from '../database/firebase';
+import { set } from 'mobx';
 
 
 const BANNER_H = 350;
 
 const InfoScreen = observer(({ route, navigation: { goBack } }) => {
-    const { id } = route.params;
+    const { id, rId } = route.params;
+    console.log("rID", rId);
     const [recipeInfo, setRecipeInfo] = useState(null);
     const scrollA = useRef(new Animated.Value(0)).current;
 
@@ -48,6 +50,7 @@ const InfoScreen = observer(({ route, navigation: { goBack } }) => {
             })
             setCategories(docs);
         })
+
     }
 
     categories.forEach((doc) => {
@@ -60,7 +63,18 @@ const InfoScreen = observer(({ route, navigation: { goBack } }) => {
     console.log(dataModalSelect);
 
 
-    /* console.log(categories); */
+
+    const storeCategory = async (category) => {
+        const recipeRef = db.doc(`users/${userID}/FavRecipes/${rId}`);
+        try {
+            console.log('ENTRA');
+            await recipeRef.update({
+                category: category
+            })
+        } catch (error) {
+            console.log('ERROR', error);
+        }
+    }
 
     useEffect(() => {
         getRecipeInfo(id, setRecipeInfo);
@@ -103,7 +117,7 @@ const InfoScreen = observer(({ route, navigation: { goBack } }) => {
                     <Text style={styles.title}>{recipeInfo.nutrition.nutrients[0].amount}Kcal</Text>
 
                     <View style={styles.modalSelector}>
-                        <ModalSelector data={dataModalSelect} initValue="Select a category for this recipe" onChange={(option) => { setCategory(option)/* model.setCategory(id, option.label, recipeInfo.image); */ }} />
+                        <ModalSelector data={dataModalSelect} initValue="Select a category for this recipe" onChange={(option) => { storeCategory(option.label)/* model.setCategory(id, option.label, recipeInfo.image); */ }} />
                     </View>
 
                     <Text style={styles.summary}>{recipeInfo.summary}</Text>
