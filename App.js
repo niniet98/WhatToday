@@ -31,7 +31,7 @@ export default function App() {
     <ModelProvider>
       <NavigationContainer>
         <StatusBar></StatusBar>
-        <Stack.Navigator initialRouteName="TabNav" screenOptions={{ headerShown: false /* headerTitle: null, headerTransparent: true */ }}>
+        <Stack.Navigator initialRouteName="LogIn" screenOptions={{ headerShown: false /* headerTitle: null, headerTransparent: true */ }}>
           <Stack.Screen name="LogIn" component={LogInScreen} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="TabNav" component={MainBottomTabNav} options={{ headerLeft: null, headerTransparent: true }} />

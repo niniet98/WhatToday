@@ -8,9 +8,16 @@ import FilterButton from '../components/FilterButton';
 import { ModelContext } from '../model/WhatTodayModel';
 import VerifyButton from '../components/VerifyButton';
 import HomeBackground from '../components/icons/HomeBackground';
+import { AuthContext } from '../Auth';
 
 const HomeScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
+    /* const { currentUser } = useContext(AuthContext); */
+    /* console.log(uid); */
+
+    const saveRecipe = async () => {
+
+    }
 
     useEffect(() => {
         model.loadRandomRecipe();
