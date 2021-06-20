@@ -5,8 +5,8 @@ import Slider from "../icons/slider2";
 
 export default function Directions({ steps }) {
   return (
-    <View style={{alignItems:'center', justifyContent: 'center'}}>
-      <Text style={styles.title}>DIRECTIONS</Text>
+    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={styles.title}>Directions</Text>
       <FlatList
         data={steps}
         renderItem={({ item, index }) => (
@@ -18,19 +18,19 @@ export default function Directions({ steps }) {
       />
       {/* sentim fer-ho així de cutre però no ens funcionava i 
       d'alguna manera havíem d'indicar que es podia fer scroll horitzontal */}
-      <Slider style={{marginVertical:20}} />
+      <Slider style={{ marginVertical: 20 }} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  title:{
+  title: {
     fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 10
   },
-  steps:{
+  steps: {
     color: 'white',
     fontSize: 14,
     marginHorizontal: 20,
