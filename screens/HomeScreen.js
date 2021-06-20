@@ -8,16 +8,28 @@ import FilterButton from '../components/FilterButton';
 import { ModelContext } from '../model/WhatTodayModel';
 import VerifyButton from '../components/VerifyButton';
 import HomeBackground from '../components/icons/HomeBackground';
-import { fire } from '../database/firebase';
+import { db, fire } from '../database/firebase';
 
 const HomeScreen = observer(({ navigation }) => {
     const model = useContext(ModelContext);
     const userID = fire.auth().currentUser.uid;
     console.log('HomeScreen User', userID);
 
-    /* const saveRecipe = async () => {
+    const saveRecipe = async (id, url) => {
+        const userRef = db.collection(`users/${userID}/FavRecipes`);
+        const snapshot = await userRef.get();
 
-    } */
+        if (!snapshot.exists) {
+            try {
+                userRef.add({
+                    id: id,
+                    url: url,
+                })
+            } catch (error) {
+                console.log('ERROR', error);
+            }
+        }
+    }
 
     useEffect(() => {
         model.loadRandomRecipe();
@@ -58,6 +70,7 @@ const HomeScreen = observer(({ navigation }) => {
                             <VerifyButton type={false} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
+                            saveRecipe(model.randomRecipe[0].id, model.randomRecipe[0].image);
                             model.addFavRecipe(model.randomRecipe[0].id, model.randomRecipe[0].image);
                             model.loadRandomRecipe();
                         }}>

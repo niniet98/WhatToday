@@ -5,16 +5,17 @@ import { auth, createUserDocument } from '../database/firebase';
 
 export default function SignUpScreen({ navigation }) {
     const [userName, setUserName] = useState(null);
+    const [fullName, setFullName] = useState(null);
     const [email, setEmail] = useState(null);
     const [pass, setPass] = useState(null);
     const [confirmPass, setConfirmPass] = useState(null);
 
     const handleSignUp = async () => {
-        console.log(userName, email, pass, confirmPass);
+        console.log(userName, fullName, email, pass, confirmPass);
         if (pass === confirmPass) {
             try {
                 const { user } = await auth.createUserWithEmailAndPassword(email, pass);
-                await createUserDocument(user, userName);
+                await createUserDocument(user, userName, fullName);
                 navigation.navigate('TabNav');
             } catch (error) {
                 alert(`ERROR: ${error}`);
@@ -28,6 +29,7 @@ export default function SignUpScreen({ navigation }) {
         <View style={styles.container}>
             <Title>Sign Up</Title>
             <TextInput placeholder="User Name" style={styles.textInput} value={userName} onChangeText={(value) => setUserName(value)} />
+            <TextInput placeholder="Full Name" style={styles.textInput} value={fullName} onChangeText={(value) => setFullName(value)} />
             <TextInput placeholder="Email" style={styles.textInput} value={email} onChangeText={(value) => setEmail(value)} />
             <TextInput placeholder="Password" style={styles.textInput} value={pass} onChangeText={(value) => setPass(value)} />
             <TextInput placeholder="Repeat Password" style={styles.textInput} value={confirmPass} onChangeText={(value) => setConfirmPass(value)} />

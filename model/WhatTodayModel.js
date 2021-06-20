@@ -3,7 +3,8 @@ import React, { createContext } from "react";
 
 
 const URL_BASE = 'https://api.spoonacular.com/recipes';
-//const apiKey = "6b7427f391974de5921bcd793e67086e";
+//const apiKey = "6b7427f391974de5921bcd793e67086e"; //noe 1
+//const apiKey = "701b25c5a2014c749a3d17ca5e3b357f"; //noe 2
 //const apiKey = "19029611d889407a81d175e7ffbebd9f"; //apiKey mario
 const apiKey = "f8b7ed4858454125a22606a37be0b9d0"; //apiKey mario 2
 //const apiKey = "40c1982b35bb441a8f82db372ebe7d9c"; //apiKey mario 3

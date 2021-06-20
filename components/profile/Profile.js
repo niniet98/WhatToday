@@ -5,14 +5,37 @@ import { useContext } from 'react'
 import { accentColor } from '../../styles/styles'
 import Demo from '../Demo'
 import { ModelContext } from '../../model/WhatTodayModel'
+import { db, fire } from '../../database/firebase'
+import { useState, useEffect } from 'react'
 
 const Profile = observer(() => {
     const model = useContext(ModelContext);
+    const userID = fire.auth().currentUser.uid;
+    const [user, setUser] = useState('');
+
+    const getData = () => {
+        var userRef = db.collection("users").doc(`${userID}`);
+        userRef.get().then((doc) => {
+            if (doc.exists) {
+                setUser(doc.data());
+            } else {
+                console.log("No such document!");
+            }
+        }).catch((err) => {
+            console.log("Error gettintg document:", err);
+        })
+    }
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    console.log(user);
 
     return (
         <View style={{ backgroundColor: "white" }}>
             <View style={{ marginHorizontal: 20, marginBottom: 60 }}>
-                <Text style={[styles.fontText, { fontSize: 18 }]}>ayelen_97</Text>
+                <Text style={[styles.fontText, { fontSize: 18 }]}>{user.username}</Text>
             </View>
             <View style={styles.container}>
                 <View style={styles.column}>
@@ -20,7 +43,7 @@ const Profile = observer(() => {
                     <Text style={styles.text, styles.fontText}>Posts</Text>
                 </View>
                 <View style={styles.column}>
-                    <Image style={styles.avatar} source={require('../../assets/ayelen.jpg')} />
+                    <Image style={styles.avatar} source={require('../../assets/user.jpg')} />
                 </View>
                 <View style={styles.column}>
                     <Text style={styles.text, styles.fontText}>{model.favRecipes.length}</Text>
@@ -28,7 +51,7 @@ const Profile = observer(() => {
                 </View>
             </View>
             <View style={{ margin: 25, alignItems: 'center', marginTop: 70 }}>
-                <Text style={[styles.fontText, { fontSize: 12 }]}>Ayelen</Text>
+                <Text style={[styles.fontText, { fontSize: 12 }]}>{user.name}</Text>
             </View>
         </View>
     )
